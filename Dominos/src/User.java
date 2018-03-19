@@ -1,4 +1,7 @@
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +17,7 @@ public class User {
 	private String lastName;
 	private String eMail;
 	private String password;
-	private Set<Address> address;
+	private Set<Address> addresses;
 	private List<Order> previousOrders;
 	private File avatar;
 	private Basket basket;
@@ -25,6 +28,8 @@ public class User {
 		setLastName(lastName);
 		setEMail(eMail);
 		setPassword(password);
+		this.addresses = new HashSet<Address>();
+		this.previousOrders = new ArrayList<Order>();
 	}
 
 	public String getFirstName() {
@@ -71,15 +76,9 @@ public class User {
 			throw new IllegalPasswordException();
 	}
 
-	// public Address getAddress() {
-	// return address;
-	// }
-	//
-	// public void setAddress(Address address) throws NullAddressException{
-	// if(!Methods.isNull(address)) {
-	// this.address = address;
-	// }else throw new NullAddressException();
-	// }
+	public Set<Address> getAddresses() {
+		return Collections.unmodifiableSet(this.addresses);
+	}
 
 	public File getAvatar() {
 		return this.avatar;
