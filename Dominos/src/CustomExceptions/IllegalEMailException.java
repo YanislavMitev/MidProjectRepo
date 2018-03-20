@@ -1,6 +1,7 @@
 package CustomExceptions;
 
 public class IllegalEMailException extends Exception {
+	private static final long serialVersionUID = -2744785191717305161L;
 	private static final String MSG = "Illegal E-mail";
 	
 	public IllegalEMailException() {
@@ -29,6 +30,5 @@ public class IllegalEMailException extends Exception {
 		// TODO Auto-generated constructor stub
 	}
 
-	private static final long serialVersionUID = -2744785191717305161L;
 
 }
