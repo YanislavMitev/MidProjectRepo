@@ -37,6 +37,36 @@ public class Address {
 		return this.name;
 	}
 
+	@Override
+	public int hashCode() {
+		return this.getStreet().hashCode() * 
+			   this.getStreetNumber().hashCode() * 
+			   this.getPostCode() * 
+			   this.getCity().hashCode() * 
+			   this.getFloor();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Address other = null;
+		if(!Methods.isNull(obj) && obj instanceof Address) {
+			other = (Address)obj;
+		}
+		
+		if(this.getStreet().equals(other.getStreet())) {
+			if(this.getStreetNumber().equals(other.getStreetNumber())) {
+				if(this.getPostCode() == other.getPostCode()) {
+					if(this.getCity() == other.getCity()) {
+						if(this.getFloor() == other.getFloor()) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	public void setName(String name) throws IllegalNameException {
 		if (Methods.checkString(name)) {
 			this.name = name;
