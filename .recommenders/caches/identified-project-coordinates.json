@@ -1,9 +1,1 @@
-<<<<<<< HEAD
-[[{"location":"C:\\Program Files\\Java\\jre-9.0.1","type":"JRE","hints":{"EXECUTION_ENVIRONMENT":"JavaSE-1.8"}},"jre:jre:1.8.0"],[{"location":"D:\\NikSu\\ITtalents\\MidProjectRepo\\Dominos","type":"PROJECT","hints":{"PROJECT_NAME":"Dominos"}},"ABSENT"]]
-=======
-<<<<<<< HEAD
-[[{"location":"E:\\IT Talents Java EE\\MidProject\\Dominos\\libs\\json-simple-1.1.jar","type":"JAR","hints":{}},"ABSENT"]]
-=======
-[[{"location":"D:\\NikSu\\ITtalents\\MidProjectRepo\\Dominos","type":"PROJECT","hints":{"PROJECT_NAME":"Dominos"}},"ABSENT"],[{"location":"C:\\Program Files\\Java\\jre-9.0.1","type":"JRE","hints":{"EXECUTION_ENVIRONMENT":"JavaSE-1.8"}},"jre:jre:1.8.0"]]
->>>>>>> fcebd13c01d740b6161fc43cf8c05c46a111376f
->>>>>>> f90a94ceb1742fd5add7ce2549705b19699190ae
+{}
