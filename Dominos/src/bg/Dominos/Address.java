@@ -7,7 +7,7 @@ import CustomExceptions.IllegalNameException;
 import StaticMethods.Methods;
 
 public class Address {
-	private static final int HIGHER_POSTCODE = 100000;
+	private static final int HIGHER_POSTCODE = 10000;
 	private static final int LOWER_POSTCODE = 1000;
 	private String name;
 	private String street;
@@ -106,7 +106,7 @@ public class Address {
 	}
 
 	public int getBlock() {
-		return block;
+		return this.block;
 	}
 
 	public void setBlock(int block) {
@@ -114,7 +114,7 @@ public class Address {
 	}
 
 	public int getEntrance() {
-		return entrance;
+		return this.entrance;
 	}
 
 	public void setEntrance(int entrance) {
@@ -122,7 +122,7 @@ public class Address {
 	}
 
 	public int getFloor() {
-		return floor;
+		return this.floor;
 	}
 
 	public void setFloor(int floor) {
@@ -130,7 +130,7 @@ public class Address {
 	}
 
 	public int getApartament() {
-		return apartament;
+		return this.apartament;
 	}
 
 	public void setApartament(int apartament) {
@@ -138,11 +138,15 @@ public class Address {
 	}
 
 	public String getBell() {
-		return bell;
+		return this.bell;
 	}
 
 	public void setBell(String bell) {
-		this.bell = bell;
+		if(Methods.checkString(bell)) {
+			this.bell = bell;			
+		}else {
+			this.bell = "";
+		}
 	}
 
 }
