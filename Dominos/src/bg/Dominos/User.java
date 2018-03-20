@@ -1,11 +1,16 @@
 package bg.Dominos;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.gson.JsonObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import CustomExceptions.IllegalAvatarException;
 import CustomExceptions.IllegalEMailException;
 import CustomExceptions.IllegalNameException;
@@ -13,7 +18,8 @@ import CustomExceptions.IllegalPasswordException;
 import CustomExceptions.NullBasketException;
 import StaticMethods.Methods;
 
-public class User {
+public class User  implements IUser{
+	private static int userNumber = 0;
 	private String firstName;
 	private String lastName;
 	private String eMail;
@@ -22,17 +28,93 @@ public class User {
 	private List<Order> previousOrders;
 	private File avatar;
 	private Basket basket;
-
+	private JSONObject saveInfo;
+	
+	
 	public User(String firstName, String lastName, String eMail, String password)
 			throws IllegalPasswordException, IllegalEMailException, IllegalNameException {
+		this.saveInfo = new JSONObject();
+        JSONArray list = new JSONArray();
+        JSONObject obj = new JSONObject();
+
+		
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEMail(eMail);
 		setPassword(password);
 		this.addresses = new HashSet<Address>();
 		this.previousOrders = new ArrayList<Order>();
+		
+		list.add(this.saveInfo.put("first name", firstName));
+		list.add(this.saveInfo.put("last name", lastName));
+		list.add(this.saveInfo.put("e-mail", eMail));
+		list.add(this.saveInfo.put("password", password));
+		
+		try (FileWriter file = new FileWriter("E:\\IT Talents Java EE\\MidProject\\Dominos\\src\\registeredUsers\\users.json")) {
+
+            file.write(this.saveInfo.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		
+		System.out.println(this.saveInfo);
+		
 	}
 
+	
+	
+	@Override
+	public void logIn(String userName, String password) {
+		if(Methods.checkString(userName) && Methods.checkPassword(password)) {
+			
+		}
+	}
+
+	@Override
+	public void logOut() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addAddress(Address address) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAddress(Address address) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changePassword(String oldPassword, String newPassword, String reenteredNewPassword) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeAvatar(File avatar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeAvatar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void emptyBasket() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -67,6 +149,7 @@ public class User {
 	}
 
 	private String getPassword() {
+		//read form JSON
 		return this.password;
 	}
 

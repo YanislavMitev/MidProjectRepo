@@ -52,6 +52,20 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+<<<<<<< HEAD
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-20 16:53:23.675
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-20 16:53:23.685
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-20 17:37:54.226
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-20 17:37:54.236
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+=======
 !SESSION 2018-03-20 17:13:16.508 -----------------------------------------------
 eclipse.buildId=4.7.2.M20171130-0510
 java.version=9.0.1
@@ -731,6 +745,7 @@ org.eclipse.recommenders.utils.Logs$LogTraceException
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1472)
+<<<<<<< HEAD
 !SESSION 2018-03-20 18:41:14.582 -----------------------------------------------
 eclipse.buildId=4.7.2.M20171130-0510
 java.version=9.0.1
@@ -759,3 +774,6 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+=======
+>>>>>>> fcebd13c01d740b6161fc43cf8c05c46a111376f
+>>>>>>> f90a94ceb1742fd5add7ce2549705b19699190ae
