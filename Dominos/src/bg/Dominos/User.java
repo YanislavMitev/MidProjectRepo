@@ -1,24 +1,26 @@
 package bg.Dominos;
+
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.gson.JsonObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import CustomExceptions.ExistingAddressException;
 import CustomExceptions.IllegalAvatarException;
 import CustomExceptions.IllegalEMailException;
 import CustomExceptions.IllegalNameException;
 import CustomExceptions.IllegalPasswordException;
+import CustomExceptions.NonExistingAddressException;
+import CustomExceptions.NullAddressException;
 import CustomExceptions.NullBasketException;
 import StaticMethods.Methods;
 
-public class User  implements IUser{
+public class User implements IUser {
 	private static int userNumber = 0;
 	private String firstName;
 	private String lastName;
@@ -28,93 +30,79 @@ public class User  implements IUser{
 	private List<Order> previousOrders;
 	private File avatar;
 	private Basket basket;
-	private JSONObject saveInfo;
-	
-	
+
 	public User(String firstName, String lastName, String eMail, String password)
 			throws IllegalPasswordException, IllegalEMailException, IllegalNameException {
-		this.saveInfo = new JSONObject();
-        JSONArray list = new JSONArray();
-        JSONObject obj = new JSONObject();
 
-		
 		setFirstName(firstName);
 		setLastName(lastName);
 		setEMail(eMail);
 		setPassword(password);
 		this.addresses = new HashSet<Address>();
 		this.previousOrders = new ArrayList<Order>();
-		
-		list.add(this.saveInfo.put("first name", firstName));
-		list.add(this.saveInfo.put("last name", lastName));
-		list.add(this.saveInfo.put("e-mail", eMail));
-		list.add(this.saveInfo.put("password", password));
-		
-		try (FileWriter file = new FileWriter("E:\\IT Talents Java EE\\MidProject\\Dominos\\src\\registeredUsers\\users.json")) {
 
-            file.write(this.saveInfo.toJSONString());
-            file.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		
-		System.out.println(this.saveInfo);
-		
 	}
 
-	
-	
+	public void updateJSON() {
+		// TODO:implement
+	}
+
 	@Override
 	public void logIn(String userName, String password) {
-		if(Methods.checkString(userName) && Methods.checkPassword(password)) {
-			
+		if (Methods.checkString(userName) && Methods.checkPassword(password)) {
+			// TODO: check in JSON file if there is such user with password
 		}
 	}
 
 	@Override
 	public void logOut() {
-		// TODO Auto-generated method stub
-		
+		// TODO: implement
+
 	}
 
 	@Override
-	public void addAddress(Address address) {
-		// TODO Auto-generated method stub
-		
+	public void addAddress(Address address) throws ExistingAddressException {
+		if (!Methods.isNull(address) && !this.addresses.contains(address)) {
+			this.addresses.add(address);
+		} else
+			throw new ExistingAddressException();
 	}
 
 	@Override
-	public void deleteAddress(Address address) {
-		// TODO Auto-generated method stub
-		
+	public void deleteAddress(Address address) throws NullAddressException, NonExistingAddressException {
+		if (!Methods.isNull(address)) {
+			if (this.addresses.contains(address)) {
+				this.addresses.remove(address);
+			} else {
+				throw new NonExistingAddressException();
+			}
+		} else {
+			throw new NullAddressException();
+		}
 	}
 
 	@Override
 	public void changePassword(String oldPassword, String newPassword, String reenteredNewPassword) {
-		// TODO Auto-generated method stub
-		
+		//TODO: implement
 	}
 
 	@Override
 	public void changeAvatar(File avatar) {
-		// TODO Auto-generated method stub
-		
+		//TODO: implement
+
 	}
 
 	@Override
 	public void removeAvatar() {
-		// TODO Auto-generated method stub
-		
+		//TODO: implement
+
 	}
 
 	@Override
 	public void emptyBasket() {
-		// TODO Auto-generated method stub
-		
+		//TODO: implement
 	}
 
-	
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -149,7 +137,7 @@ public class User  implements IUser{
 	}
 
 	private String getPassword() {
-		//read form JSON
+		// read form JSON
 		return this.password;
 	}
 
@@ -184,5 +172,11 @@ public class User  implements IUser{
 			this.basket = basket;
 		} else
 			throw new NullBasketException();
+	}
+
+	@Override
+	public void register() {
+		// TODO Auto-generated method stub
+
 	}
 }
