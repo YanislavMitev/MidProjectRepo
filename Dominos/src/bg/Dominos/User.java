@@ -1,4 +1,4 @@
-package bg.Dominos;
+package bg.dominos;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,15 +10,15 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import CustomExceptions.ExistingAddressException;
-import CustomExceptions.IllegalAvatarException;
-import CustomExceptions.IllegalEMailException;
-import CustomExceptions.IllegalNameException;
-import CustomExceptions.IllegalPasswordException;
-import CustomExceptions.NonExistingAddressException;
-import CustomExceptions.NullAddressException;
-import CustomExceptions.NullBasketException;
-import StaticMethods.Methods;
+import bg.dominos.exceptions.ExistingAddressException;
+import bg.dominos.exceptions.IllegalAvatarException;
+import bg.dominos.exceptions.IllegalEMailException;
+import bg.dominos.exceptions.IllegalNameException;
+import bg.dominos.exceptions.IllegalPasswordException;
+import bg.dominos.exceptions.NonExistingAddressException;
+import bg.dominos.exceptions.NullAddressException;
+import bg.dominos.exceptions.NullBasketException;
+import bg.dominos.utils.Methods;
 
 public class User implements IUser {
 	private static int userNumber = 0;
@@ -43,9 +43,6 @@ public class User implements IUser {
 
 	}
 
-	public void updateJSON() {
-		// TODO:implement
-	}
 
 	@Override
 	public void logIn(String userName, String password) {

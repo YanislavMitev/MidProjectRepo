@@ -1,6 +1,6 @@
-/.metadata/
-/.recommenders/
-/.mylyn/
-/.plugins/
-/.lock/
-/.log/
+.mylyn/
+.plugins/
+.lock/
+.log/
+.metadata/
+.recommenders/

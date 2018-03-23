@@ -1,4 +1,4 @@
-package bg.Dominos;
+package bg.dominos;
 
 public class Basket {
 

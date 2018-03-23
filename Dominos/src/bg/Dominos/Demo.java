@@ -1,9 +1,9 @@
-package bg.Dominos;
+package bg.dominos;
 
-import CustomExceptions.IllegalEMailException;
-import CustomExceptions.IllegalNameException;
-import CustomExceptions.IllegalPasswordException;
-import StaticMethods.Methods;
+import bg.dominos.exceptions.IllegalEMailException;
+import bg.dominos.exceptions.IllegalNameException;
+import bg.dominos.exceptions.IllegalPasswordException;
+import bg.dominos.utils.Methods;
 
 public class Demo {
 

@@ -1,4 +1,4 @@
-package CustomExceptions;
+package bg.dominos.exceptions;
 
 public class NullAddressException extends Exception {
 	private static final long serialVersionUID = 1908505256301557468L;

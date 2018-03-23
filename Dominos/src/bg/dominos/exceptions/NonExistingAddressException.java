@@ -1,4 +1,4 @@
-package CustomExceptions;
+package bg.dominos.exceptions;
 
 public class NonExistingAddressException extends Exception {
 

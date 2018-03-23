@@ -1,4 +1,4 @@
-package CustomExceptions;
+package bg.dominos.exceptions;
 
 public class IllegalEMailException extends Exception {
 	private static final long serialVersionUID = -2744785191717305161L;
