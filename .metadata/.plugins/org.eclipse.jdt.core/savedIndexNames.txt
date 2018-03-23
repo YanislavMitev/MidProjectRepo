@@ -1,5 +1,0 @@
-INDEX VERSION 1.130+D:\NikSu\ITtalents\MidProjectRepo\.metadata\.plugins\org.eclipse.jdt.core
-1625386932.index
-638948493.index
-3384513373.index
-3678430642.index
