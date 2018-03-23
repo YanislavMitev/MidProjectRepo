@@ -1,4 +1,4 @@
-package bg.dominos;
+package bg.Dominos;
 
 public class Order {
 

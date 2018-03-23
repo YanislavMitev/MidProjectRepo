@@ -1,4 +1,4 @@
-package bg.dominos.exceptions;
+package CustomExceptions;
 
 public class IlleagalPostcodeException extends Exception {
 	private static final long serialVersionUID = -7380131730517107912L;

@@ -1,4 +1,4 @@
-package bg.dominos.exceptions;
+package CustomExceptions;
 
 public class NullBasketException extends Exception {
 	private static final long serialVersionUID = 2922393525686220872L;

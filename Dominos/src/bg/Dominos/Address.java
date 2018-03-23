@@ -1,10 +1,10 @@
-package bg.dominos;
+package bg.Dominos;
 
-import bg.dominos.exceptions.IlleagalPhoneNumberException;
-import bg.dominos.exceptions.IlleagalPostcodeException;
-import bg.dominos.exceptions.IlleagalRestaurantException;
-import bg.dominos.exceptions.IllegalNameException;
-import bg.dominos.utils.Methods;
+import CustomExceptions.IlleagalPhoneNumberException;
+import CustomExceptions.IlleagalPostcodeException;
+import CustomExceptions.IlleagalRestaurantException;
+import CustomExceptions.IllegalNameException;
+import StaticMethods.Methods;
 
 public class Address {
 	private static final int HIGHER_POSTCODE = 100000;

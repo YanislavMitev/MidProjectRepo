@@ -1,4 +1,4 @@
-package bg.dominos.exceptions;
+package CustomExceptions;
 
 public class IllegalPasswordException extends Exception {
 	private static final long serialVersionUID = -4600226465412571618L;

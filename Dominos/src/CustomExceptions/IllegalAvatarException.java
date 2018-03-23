@@ -1,4 +1,4 @@
-package bg.dominos.exceptions;
+package CustomExceptions;
 
 public class IllegalAvatarException extends Exception {
 	private static final long serialVersionUID = 4643377085674553053L;

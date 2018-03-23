@@ -1,4 +1,4 @@
-package bg.dominos.exceptions;
+package CustomExceptions;
 
 public class IllegalNameException extends Exception{
 	private static final String MSG = "Illegal name";

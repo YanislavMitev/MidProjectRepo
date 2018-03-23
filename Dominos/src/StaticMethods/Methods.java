@@ -1,4 +1,4 @@
-package bg.dominos.utils;
+package StaticMethods;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

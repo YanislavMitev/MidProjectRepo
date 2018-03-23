@@ -1,8 +1,10 @@
-package bg.dominos;
+package bg.Dominos;
 
 import java.io.File;
 
-import bg.dominos.exceptions.*;
+import CustomExceptions.ExistingAddressException;
+import CustomExceptions.NonExistingAddressException;
+import CustomExceptions.NullAddressException;
 
 public interface IUser {
 	public void logIn(String userName, String password);
