@@ -1,4 +1,4 @@
-package bg.dominos.models;
+package bg.dominos.application;
 
 import bg.dominos.utils.Methods;
 
