@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 /.metadata/
 /.recommenders/
 /.mylyn/
 /.plugins/
 /.lock/
 /.log/
+=======
+.metadata/
+.recommenders/
+
+>>>>>>> fdb601dd348cdca8517daf9ac5b32c9367b98660
