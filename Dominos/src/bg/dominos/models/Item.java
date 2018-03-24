@@ -50,5 +50,9 @@ public abstract class Item {
 			}else throw new InvalidQuantityException(INVALID_QUANTITY);
 		}
 	}
+
+	public byte getQuantity() {
+		return this.quantity;
+	}
 	
 }

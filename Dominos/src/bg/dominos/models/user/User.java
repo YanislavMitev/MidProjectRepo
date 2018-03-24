@@ -7,24 +7,68 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
+import bg.dominos.exceptions.CannotAddToBasketException;
+import bg.dominos.exceptions.CannotRemoveFromBasketException;
 import bg.dominos.exceptions.ExistingAddressException;
 import bg.dominos.exceptions.IllegalAvatarException;
 import bg.dominos.exceptions.IllegalEMailException;
 import bg.dominos.exceptions.IllegalNameException;
 import bg.dominos.exceptions.IllegalPasswordException;
+import bg.dominos.exceptions.InvalidQuantityException;
 import bg.dominos.exceptions.NonExistingAddressException;
 import bg.dominos.exceptions.NullAddressException;
-import bg.dominos.exceptions.NullBasketException;
+import bg.dominos.exceptions.NullOrEmptyBasketException;
 import bg.dominos.models.Address;
-import bg.dominos.models.Basket;
+import bg.dominos.models.Item;
 import bg.dominos.models.Order;
 import bg.dominos.utils.Methods;
 
-public class User implements IUser {
-	private static int userNumber = 0;
+public final class User implements IUser {
+	private static final String CANNOT_ADD_TO_BASKET = "Cannot add to basket.";
+	private static final String CANNOT_REMOVE_FROM_BASKET = "Cannot remove from basket.";
+	private static final String EMPTY_BASKET = "Empty basket.";
+	
+	private class Basket{
+		private List<Item> items;
+		
+		public Basket() {
+			this.items = new ArrayList<Item>();
+		}
+		
+		private int getIndexOfItem(Item item) {
+			int indexOfItem = this.items.indexOf(item);
+			return indexOfItem;
+		}
+		
+		public void addToBasket(Item item) throws InvalidQuantityException, CannotAddToBasketException {
+			if(!Methods.isNull(item)) {
+				if(this.items.contains(item)) {
+					int indexOfItem = getIndexOfItem(item);
+					int increasedQuantity = this.items.get(indexOfItem).getQuantity() + 1;
+					this.items.get(indexOfItem).setQuantity(increasedQuantity);
+				}else {
+					this.items.add(item);
+				}
+			}else throw new CannotAddToBasketException(CANNOT_ADD_TO_BASKET);
+		}
+		
+		public void removeFromBasket(Item item) throws CannotRemoveFromBasketException {
+			if(!Methods.isNull(item)) {
+				if(this.items.contains(item)) {
+					this.items.remove(getIndexOfItem(item));
+				}
+			}
+			throw new CannotRemoveFromBasketException(CANNOT_REMOVE_FROM_BASKET);
+		}
+		
+		public void emptyBasket() throws NullOrEmptyBasketException {
+			if(!this.items.isEmpty()) {
+				this.items.clear();
+			}else throw new NullOrEmptyBasketException(EMPTY_BASKET);
+		}
+	}
+
+	
 	private String firstName;
 	private String lastName;
 	private String eMail;
@@ -43,25 +87,22 @@ public class User implements IUser {
 		setPassword(password);
 		this.addresses = new HashSet<Address>();
 		this.previousOrders = new ArrayList<Order>();
-
+		this.basket = new Basket();
 	}
 
-	public void updateJSON() {
-		// TODO:implement
-	}
 
-	@Override
-	public void logIn(String userName, String password) {
-		if (Methods.checkString(userName) && Methods.checkPassword(password)) {
-			// TODO: check in JSON file if there is such user with password
-		}
-	}
-
-	@Override
-	public void logOut() {
-		// TODO: implement
-
-	}
+//	@Override
+//	public void logIn(String userName, String password) {
+//		if (Methods.checkString(userName) && Methods.checkPassword(password)) {
+//			// TODO: check in JSON file if there is such user with password
+//		}
+//	}
+//
+//	@Override
+//	public void logOut() {
+//		// TODO: implement
+//
+//	}
 
 	@Override
 	public void addAddress(Address address) throws ExistingAddressException {
@@ -72,7 +113,7 @@ public class User implements IUser {
 	}
 
 	@Override
-	public void deleteAddress(Address address) throws NullAddressException, NonExistingAddressException {
+	public void deleteAddress(Address address) throws NonExistingAddressException, NullAddressException {
 		if (!Methods.isNull(address)) {
 			if (this.addresses.contains(address)) {
 				this.addresses.remove(address);
@@ -99,11 +140,6 @@ public class User implements IUser {
 	public void removeAvatar() {
 		//TODO: implement
 
-	}
-
-	@Override
-	public void emptyBasket() {
-		//TODO: implement
 	}
 
 	public String getFirstName() {
@@ -170,16 +206,18 @@ public class User implements IUser {
 		return this.basket;
 	}
 
-	public void setBasket(Basket basket) throws NullBasketException {
+	public void setBasket(Basket basket) throws NullOrEmptyBasketException {
 		if (!Methods.isNull(basket)) {
 			this.basket = basket;
 		} else
-			throw new NullBasketException();
+			throw new NullOrEmptyBasketException();
 	}
 
-	@Override
-	public void register() {
-		// TODO Auto-generated method stub
+	
+//	@Override
+//	public void register() {
+//		//TODO: implement
+//	}
 
-	}
+	
 }

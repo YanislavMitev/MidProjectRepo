@@ -51,6 +51,8 @@ public class Address {
 		Address other = null;
 		if(!Methods.isNull(obj) && obj instanceof Address) {
 			other = (Address)obj;
+		}else {
+			return false;
 		}
 		
 		if(this.getStreet().equals(other.getStreet())) {
