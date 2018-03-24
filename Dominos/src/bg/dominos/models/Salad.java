@@ -1,5 +1,15 @@
 package bg.dominos.models;
 
-public class Salad {
+import bg.dominos.exceptions.IllegalPriceException;
+import bg.dominos.exceptions.IllegalTypeException;
+import bg.dominos.exceptions.IllegalWeightException;
+import bg.dominos.exceptions.InvalidQuantityException;
 
+public class Salad extends Food{
+
+	public Salad(float price, String type, int quantity, float weight)
+			throws IllegalPriceException, IllegalTypeException, InvalidQuantityException, IllegalWeightException {
+		super(price, type, quantity, weight);
+	}
+	
 }

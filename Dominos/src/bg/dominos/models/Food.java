@@ -20,8 +20,7 @@ public abstract class Food extends Item implements IFood {
 	
 	public Food(float price, String type, int quantity, float weight)
 			throws IllegalPriceException, IllegalTypeException, InvalidQuantityException, IllegalWeightException {
-		super(price);
-		setType(type);
+		super(type,price);
 		setQuantity(quantity);
 		setWeight(weight);
 		this.ingredients = new ArrayList<Ingredient>();
