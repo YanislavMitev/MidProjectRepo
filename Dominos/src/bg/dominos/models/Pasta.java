@@ -9,7 +9,6 @@ public class Pasta extends Food {
 	private static final String TYPE = "Pasta";
 	
 	
-	
 	public Pasta(float price, int quantity, float weight)
 			throws IllegalPriceException, IllegalTypeException, InvalidQuantityException, IllegalWeightException {
 		super(price, TYPE, quantity, weight);
