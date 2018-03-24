@@ -2,15 +2,10 @@ package bg.dominos.models.user;
 
 import java.io.File;
 
-import bg.dominos.exceptions.CannotAddToBasketException;
-import bg.dominos.exceptions.CannotRemoveFromBasketException;
 import bg.dominos.exceptions.ExistingAddressException;
-import bg.dominos.exceptions.InvalidQuantityException;
 import bg.dominos.exceptions.NonExistingAddressException;
 import bg.dominos.exceptions.NullAddressException;
-import bg.dominos.exceptions.NullOrEmptyBasketException;
 import bg.dominos.models.Address;
-import bg.dominos.models.Item;
 
 public interface IUser {
 	
