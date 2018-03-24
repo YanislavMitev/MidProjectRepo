@@ -1,9 +1,6 @@
 package bg.dominos.models;
 
 import bg.dominos.exceptions.IllegalPriceException;
-import bg.dominos.exceptions.IllegalTypeException;
-import bg.dominos.exceptions.IllegalWeightException;
-import bg.dominos.exceptions.InvalidQuantityException;
 
 public class Starter extends Item{
 	private String description;

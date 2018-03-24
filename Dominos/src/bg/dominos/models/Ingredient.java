@@ -2,7 +2,6 @@ package bg.dominos.models;
 
 import bg.dominos.exceptions.IllegalPriceException;
 import bg.dominos.exceptions.IllegalTypeException;
-import bg.dominos.utils.Methods;
 
 public class Ingredient extends Item{
 

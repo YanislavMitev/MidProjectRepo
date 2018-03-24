@@ -5,12 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bg.dominos.exceptions.CannotAddIngredientException;
-<<<<<<< HEAD
-=======
 import bg.dominos.exceptions.CannotRemoveIngredientException;
-import bg.dominos.exceptions.IllegalPriceException;
-import bg.dominos.exceptions.IllegalTypeException;
->>>>>>> 0dde1fff67a8f602bf67b39460aa97572d847dc2
 import bg.dominos.exceptions.IllegalWeightException;
 import bg.dominos.utils.Methods;
 
