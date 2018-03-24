@@ -16,7 +16,7 @@ public abstract class Item {
 	private byte quantity;
 	
 	
-	public Item(float price) throws IllegalPriceException{
+	public Item(String type,float price) throws IllegalPriceException{
 		this.setPrice(price);
 	}
 	

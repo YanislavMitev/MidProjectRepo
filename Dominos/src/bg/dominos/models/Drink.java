@@ -1,5 +1,11 @@
 package bg.dominos.models;
 
-public class Drink {
+import bg.dominos.exceptions.IllegalPriceException;
+
+public class Drink extends Item {
+
+	public Drink(String type, float price) throws IllegalPriceException {
+		super(type, price);
+	}
 
 }
