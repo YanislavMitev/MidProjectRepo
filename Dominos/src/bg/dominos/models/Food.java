@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bg.dominos.exceptions.CannotAddIngredientException;
+<<<<<<< HEAD
+=======
 import bg.dominos.exceptions.CannotRemoveIngredientException;
 import bg.dominos.exceptions.IllegalPriceException;
 import bg.dominos.exceptions.IllegalTypeException;
+>>>>>>> 0dde1fff67a8f602bf67b39460aa97572d847dc2
 import bg.dominos.exceptions.IllegalWeightException;
-import bg.dominos.exceptions.InvalidQuantityException;
 import bg.dominos.utils.Methods;
 
 public abstract class Food extends Item implements IFood {
@@ -21,13 +23,17 @@ public abstract class Food extends Item implements IFood {
 	private List<Ingredient> ingredients;
 	
 	public Food(float price, String type, int quantity, float weight)
-			throws IllegalPriceException, IllegalTypeException, InvalidQuantityException, IllegalWeightException {
+			throws Exception {
 		super(type,price);
 		setQuantity(quantity);
 		setWeight(weight);
 		this.ingredients = new ArrayList<Ingredient>();
 	}
 	
+	public float getWeight() {
+		return weight;
+	}
+
 	public void setWeight(float weight) throws IllegalWeightException {
 		if(weight > 0.0f && weight <= MAX_WEIGHT) {
 			this.weight = weight;
