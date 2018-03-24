@@ -11,5 +11,6 @@ public class Appetizer extends Food {
 			throws IllegalPriceException, IllegalTypeException, InvalidQuantityException, IllegalWeightException {
 		super(price, type, quantity, weight);
 	}
+	
 
 }
