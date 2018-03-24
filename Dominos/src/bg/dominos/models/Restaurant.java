@@ -4,6 +4,7 @@ import bg.dominos.exceptions.IlleagalPhoneNumberException;
 import bg.dominos.exceptions.IllegalNameException;
 import bg.dominos.exceptions.IllegalWorkingTimeException;
 import bg.dominos.exceptions.NonExistingAddressException;
+import bg.dominos.exceptions.NonExistingMenuException;
 import bg.dominos.utils.Methods;
 
 public class Restaurant {
@@ -18,17 +19,16 @@ public class Restaurant {
 	private boolean eatingPlaces;
 
 	public Restaurant(String name, String address, String workingTime, boolean active, String phoneNumber, Menu menu,
-			boolean delivery, boolean carryOut, boolean eatingPlaces) {
-		super();
-		this.name = name;
-		this.address = address;
-		this.workingTime = workingTime;
-		this.active = active;
-		this.phoneNumber = phoneNumber;
-		this.menu = menu;
-		this.delivery = delivery;
-		this.carryOut = carryOut;
-		this.eatingPlaces = eatingPlaces;
+			boolean delivery, boolean carryOut, boolean eatingPlaces) throws Exception {
+		setName(name);
+		setAddress(address);
+		setWorkingTime(workingTime);
+		setActive(active);
+		setPhoneNumber(phoneNumber);
+		setMenu(menu);
+		setDelivery(delivery);
+		setCarryOut(carryOut);
+		setEatingPlaces(eatingPlaces);
 	}
 
 	public String getName() {
@@ -36,9 +36,10 @@ public class Restaurant {
 	}
 
 	public void setName(String name) throws IllegalNameException {
-		if(Methods.checkString(name)) {
-			this.name = name;			
-		}else throw new IllegalNameException();
+		if (Methods.checkString(name)) {
+			this.name = name;
+		} else
+			throw new IllegalNameException();
 	}
 
 	public String getAddress() {
@@ -46,9 +47,10 @@ public class Restaurant {
 	}
 
 	public void setAddress(String address) throws NonExistingAddressException {
-		if(Methods.checkString(address)) {
-			this.address = address;			
-		}else throw new NonExistingAddressException();
+		if (Methods.checkString(address)) {
+			this.address = address;
+		} else
+			throw new NonExistingAddressException();
 	}
 
 	public String getWorkingTime() {
@@ -56,9 +58,10 @@ public class Restaurant {
 	}
 
 	public void setWorkingTime(String workingTime) throws IllegalWorkingTimeException {
-		if(Methods.checkString(workingTime) && Methods.checkWorkingHoures(workingTime)){
-			this.workingTime = workingTime;			
-		}else throw new IllegalWorkingTimeException();
+		if (Methods.checkString(workingTime) && Methods.checkWorkingHoures(workingTime)) {
+			this.workingTime = workingTime;
+		} else
+			throw new IllegalWorkingTimeException();
 	}
 
 	public boolean isActive() {
@@ -84,8 +87,11 @@ public class Restaurant {
 		return menu;
 	}
 
-	public void setMenu(Menu menu) {
-		this.menu = menu;
+	public void setMenu(Menu menu) throws NonExistingMenuException {
+		if (menu != null) {
+			this.menu = menu;
+		} else
+			throw new NonExistingMenuException();
 	}
 
 	public boolean isDelivery() {
