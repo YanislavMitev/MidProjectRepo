@@ -16,8 +16,9 @@ import bg.dominos.models.user.User;
 public final class UserService implements IUserService {
 
 	private static UserService userService = null;
-	private List<User> reigsteredUsers;
-
+	public List<User> reigsteredUsers;
+//	private User user;
+	
 	private UserService() {
 		this.reigsteredUsers = new ArrayList<User>();
 	}
@@ -54,6 +55,7 @@ public final class UserService implements IUserService {
 		File registeredUsers = new File(PATH_REGISTERED_USERS);
 		registeredUsers.mkdir();
 		File usersRepo = new File(registeredUsers, "usersRepo.json");
+		usersRepo.createNewFile();
 		FileInputStream fileInputStream = new FileInputStream(usersRepo);
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -91,5 +93,9 @@ public final class UserService implements IUserService {
 		// should be in the finally clause of a try catch
 		fileOutputStream.close();
 	}
+	
+	
+
+	
 
 }

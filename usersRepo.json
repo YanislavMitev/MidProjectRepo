@@ -1,0 +1,84 @@
+[
+  {
+    "firstName": "Yanislav",
+    "lastName": "Mitev",
+    "eMail": "yanislav.mitev@gmail.com",
+    "password": "azSeKazvamKaktoMamaMeEKrystila",
+    "addresses": [
+      {
+        "street": "Daskal Manol",
+        "streetNumber": "18",
+        "postCode": 1606,
+        "city": "SOFIA",
+        "restaurant": {
+          "name": "Dominos",
+          "address": "South Park",
+          "workingTime": "09:00-23:01",
+          "active": true,
+          "phoneNumber": "0891234567",
+          "menu": {},
+          "delivery": true,
+          "carryOut": true,
+          "eatingPlaces": false
+        },
+        "phoneNumber": "0899716512",
+        "block": 0,
+        "entrance": 0,
+        "floor": 1,
+        "apartament": 0
+      }
+    ],
+    "isLoggedIn": false,
+    "previousOrders": [],
+    "basket": {
+      "items": []
+    }
+  },
+  {
+    "firstName": "Yanislav",
+    "lastName": "Mitev",
+    "eMail": "yanislav.mitev@gmail.com",
+    "password": "azSeKazvamKaktoMamaMeEKrystila",
+    "addresses": [
+      {
+        "street": "Daskal Manol",
+        "streetNumber": "18",
+        "postCode": 1606,
+        "city": "SOFIA",
+        "restaurant": {
+          "name": "Dominos",
+          "address": "South Park",
+          "workingTime": "09:00-23:01",
+          "active": true,
+          "phoneNumber": "0891234567",
+          "menu": {},
+          "delivery": true,
+          "carryOut": true,
+          "eatingPlaces": false
+        },
+        "phoneNumber": "0899716512",
+        "block": 0,
+        "entrance": 0,
+        "floor": 1,
+        "apartament": 0
+      }
+    ],
+    "isLoggedIn": false,
+    "previousOrders": [],
+    "basket": {
+      "items": []
+    }
+  },
+  {
+    "firstName": "Yanislav",
+    "lastName": "Mitev",
+    "eMail": "yanislav@gmail.com",
+    "password": "azSeKazvamKaktoMamaMeEKrystila",
+    "addresses": [],
+    "isLoggedIn": false,
+    "previousOrders": [],
+    "basket": {
+      "items": []
+    }
+  }
+]

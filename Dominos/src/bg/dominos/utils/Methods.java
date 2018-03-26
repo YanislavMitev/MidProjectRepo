@@ -30,7 +30,7 @@ public abstract class Methods {
 	}
 
 	public static boolean checkPhoneNumber(String phoneNumber) {
-		Pattern pattern = Pattern.compile("0"+"[89]"+"[789]" + "\\d{6}");
+		Pattern pattern = Pattern.compile("0"+"[89]"+"[789]" + "\\d{7}");
 		Matcher matcher = pattern.matcher(phoneNumber);
 		if (matcher.matches()) {
 			return true;

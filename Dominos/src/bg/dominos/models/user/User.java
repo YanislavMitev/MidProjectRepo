@@ -35,40 +35,7 @@ public final class User implements IUser {
 			this.items = new ArrayList<Item>();
 		}
 
-		private int getIndexOfItem(Item item) {
-			int indexOfItem = this.items.indexOf(item);
-			return indexOfItem;
-		}
-
-		public void addToBasket(Item item) throws ItemException, BasketException {
-			if (!Methods.isNull(item)) {
-				if (this.items.contains(item)) {
-					int indexOfItem = getIndexOfItem(item);
-					int increasedQuantity = this.items.get(indexOfItem).getQuantity() + 1;
-					this.items.get(indexOfItem).setQuantity(increasedQuantity);
-				} else {
-					this.items.add(item);
-				}
-			} else
-				throw new BasketException(CANNOT_ADD_TO_BASKET);
-		}
-
-		public void removeFromBasket(Item item) throws BasketException {
-			if (!Methods.isNull(item)) {
-				if (this.items.contains(item)) {
-					this.items.remove(getIndexOfItem(item));
-				}
 			}
-			throw new BasketException(CANNOT_REMOVE_FROM_BASKET);
-		}
-
-		public void emptyBasket() throws BasketException {
-			if (!this.items.isEmpty()) {
-				this.items.clear();
-			} else
-				throw new BasketException(EMPTY_BASKET);
-		}
-	}
 
 	private String firstName;
 	private String lastName;
@@ -240,4 +207,39 @@ public final class User implements IUser {
 	public void logOut() {
 		this.setLoggedIn(false);
 	}
+	
+	private int getIndexOfItem(Item item) {
+		int indexOfItem = this.basket.items.indexOf(item);
+		return indexOfItem;
+	}
+
+	public void addToBasket(Item item) throws ItemException, BasketException {
+		if (!Methods.isNull(item)) {
+			if (this.basket.items.contains(item)) {
+				int indexOfItem = getIndexOfItem(item);
+				int increasedQuantity = this.basket.items.get(indexOfItem).getQuantity() + 1;
+				this.basket.items.get(indexOfItem).setQuantity(increasedQuantity);
+			} else {
+				this.basket.items.add(item);
+			}
+		} else
+			throw new BasketException(CANNOT_ADD_TO_BASKET);
+	}
+
+	public void removeFromBasket(Item item) throws BasketException {
+		if (!Methods.isNull(item)) {
+			if (this.basket.items.contains(item)) {
+				this.basket.items.remove(getIndexOfItem(item));
+			}
+		}
+		throw new BasketException(CANNOT_REMOVE_FROM_BASKET);
+	}
+
+	public void emptyBasket() throws BasketException {
+		if (!this.basket.items.isEmpty()) {
+			this.basket.items.clear();
+		} else
+			throw new BasketException(EMPTY_BASKET);
+	}
+
 }

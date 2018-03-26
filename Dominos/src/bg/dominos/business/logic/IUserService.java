@@ -1,11 +1,7 @@
 package bg.dominos.business.logic;
 
-import java.io.File;
-
 public interface IUserService {
-	public static final String PATH_REGISTERED_USERS = "D:" + File.separator + "NikSu" + File.separator + "ITtalents"
-			+ File.separator + "MidProjectRepo" + File.separator + "Dominos" + File.separator + "src" + File.separator
-			+ "registeredUsers";
+	public static final String PATH_REGISTERED_USERS ="src/registeredUsers";
 
 	public void extractUsers() throws Exception;
 

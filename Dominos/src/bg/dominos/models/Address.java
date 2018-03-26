@@ -131,6 +131,12 @@ public class Address {
 		}else throw new RestaurantException(ILLEGAL_RESTAURANT);
 	}
 
+	@Override
+	public String toString() {
+		return "Address [street=" + street + ", streetNumber=" + streetNumber + ", postCode=" + postCode + ", city="
+				+ city + ", restaurant=" + restaurant + ", phoneNumber=" + phoneNumber + ", floor=" + floor + "]";
+	}
+
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

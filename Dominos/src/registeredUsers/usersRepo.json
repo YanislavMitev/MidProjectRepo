@@ -1,48 +1,23 @@
 [
   {
-    "firstName": "Alex",
-    "lastName": "Pesho",
-    "eMail": "igracha69@vbox.com"
-  },
-  {
-    "firstName": "asd",
-    "lastName": "dd",
-    "eMail": "sd@abv.bg",
-    "password": "dasd",
+    "firstName": "Yanislav",
+    "lastName": "Mitev",
+    "eMail": "yanislav11@gmail.com",
+    "password": "azSeKazvamKaktoMamaMeEKrystila",
     "addresses": [],
+    "isLoggedIn": false,
     "previousOrders": [],
     "basket": {
       "items": []
     }
   },
   {
-    "firstName": "111",
-    "lastName": "11",
-    "eMail": "sd@abv.bg",
-    "password": "11",
+    "firstName": "Yanislav",
+    "lastName": "Mitev",
+    "eMail": "yanislav@gmail.com",
+    "password": "azSeKazvamKaktoMamaMeEKrystila",
     "addresses": [],
-    "previousOrders": [],
-    "basket": {
-      "items": []
-    }
-  },
-  {
-    "firstName": "asd",
-    "lastName": "dd",
-    "eMail": "sd@abv.bg",
-    "password": "dasd",
-    "addresses": [],
-    "previousOrders": [],
-    "basket": {
-      "items": []
-    }
-  },
-  {
-    "firstName": "asd",
-    "lastName": "dd",
-    "eMail": "sd@abv.bg",
-    "password": "dasd",
-    "addresses": [],
+    "isLoggedIn": false,
     "previousOrders": [],
     "basket": {
       "items": []
