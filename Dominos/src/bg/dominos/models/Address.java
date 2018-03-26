@@ -1,12 +1,16 @@
 package bg.dominos.models;
 
-import bg.dominos.exceptions.IlleagalPhoneNumberException;
-import bg.dominos.exceptions.IlleagalPostcodeException;
-import bg.dominos.exceptions.IlleagalRestaurantException;
-import bg.dominos.exceptions.IllegalNameException;
+import bg.dominos.exceptions.AddressException;
+import bg.dominos.exceptions.RestaurantException;
 import bg.dominos.utils.Methods;
 
 public class Address {
+	private static final String ILLEGAL_RESTAURANT = "Illegal restaurant";
+	private static final String ILLEGAL_POSTCODE = "Illegal postcode";
+	private static final String ILLEGAL_STREET_NUMBER = "Illegal street number";
+	private static final String ILLEGAL_PHONE_NUMBER = "Illegal phone number";
+	private static final String ILLEGAL_STREET_NAME = "Illegal street name";
+	private static final String ILLEGAL_ADDRESS_NAME = "Illegal address name";
 	private static final int HIGHER_POSTCODE = 10000;
 	private static final int LOWER_POSTCODE = 1000;
 	private String name;
@@ -69,43 +73,43 @@ public class Address {
 		return false;
 	}
 
-	public void setName(String name) throws IllegalNameException {
+	public void setName(String name) throws AddressException { 
 		if (Methods.checkString(name)) {
 			this.name = name;
 		} else
-			throw new IllegalNameException();
+			throw new AddressException(ILLEGAL_ADDRESS_NAME);
 	}
 
 	public String getStreet() {
 		return this.street;
 	}
 
-	public void setStreet(String street) throws IllegalNameException {
+	public void setStreet(String street) throws AddressException { 
 		if (Methods.checkString(street)) {
 			this.street = street;
 		} else
-			throw new IllegalNameException();
+			throw new AddressException(ILLEGAL_STREET_NAME);
 	}
 
 	public String getStreetNumber() {
 		return streetNumber;
 	}
 
-	public void setStreetNumber(String streetNumber) throws IllegalNameException {
+	public void setStreetNumber(String streetNumber) throws AddressException {
 		if (Methods.checkString(streetNumber)) {
 			this.streetNumber = streetNumber;
 		} else
-			throw new IllegalNameException();
+			throw new AddressException(ILLEGAL_STREET_NUMBER);
 	}
 
 	public int getPostCode() {
 		return postCode;
 	}
 
-	public void setPostCode(int postCode) throws IlleagalPostcodeException {
+	public void setPostCode(int postCode) throws AddressException {
 		if (postCode >= LOWER_POSTCODE && postCode < HIGHER_POSTCODE) {
 			this.postCode = postCode;
-		}else throw new IlleagalPostcodeException();
+		}else throw new AddressException(ILLEGAL_POSTCODE);
 	}
 
 	public Cities getCity() {
@@ -120,21 +124,21 @@ public class Address {
 		return restaurant;
 	}
 
-	public void setRestaurant(Restaurant restaurant) throws IlleagalRestaurantException {
+	public void setRestaurant(Restaurant restaurant) throws RestaurantException {
 		// check if restaurant exist
 		if(!Methods.isNull(restaurant)) {
 			this.restaurant = restaurant;
-		}else throw new IlleagalRestaurantException();
+		}else throw new RestaurantException(ILLEGAL_RESTAURANT);
 	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) throws IlleagalPhoneNumberException {
+	public void setPhoneNumber(String phoneNumber) throws AddressException {
 		if(Methods.checkPhoneNumber(phoneNumber)) {
 			this.phoneNumber = phoneNumber;
-		}else throw new IlleagalPhoneNumberException();
+		}else throw new AddressException(ILLEGAL_PHONE_NUMBER);
 	}
 
 	public int getBlock() {

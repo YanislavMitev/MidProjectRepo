@@ -1,13 +1,14 @@
 package bg.dominos.models;
 
-import bg.dominos.exceptions.IlleagalPhoneNumberException;
-import bg.dominos.exceptions.IllegalNameException;
-import bg.dominos.exceptions.IllegalWorkingTimeException;
-import bg.dominos.exceptions.NonExistingAddressException;
-import bg.dominos.exceptions.NonExistingMenuException;
+import bg.dominos.exceptions.RestaurantException;
 import bg.dominos.utils.Methods;
 
 public class Restaurant {
+	private static final String NULL_VALUE_AS_MENU = "Null value as menu";
+	private static final String ILLEGAL_WORKING_TIME = "Illegal working time";
+	private static final String ILLEGAL_ADDRESS_NAME = "Illegal address name";
+	private static final String ILLEGAL_RESTAURANT_NAME = "Illegal restaurant name";
+	private static final String ILLEGAL_PHONE_NUMBER = "Illegal restaurant phone number";
 	private String name;
 	private String address;
 	private String workingTime;
@@ -19,7 +20,7 @@ public class Restaurant {
 	private boolean eatingPlaces;
 
 	public Restaurant(String name, String address, String workingTime, boolean active, String phoneNumber, Menu menu,
-			boolean delivery, boolean carryOut, boolean eatingPlaces) throws Exception {
+			boolean delivery, boolean carryOut, boolean eatingPlaces) throws RestaurantException {
 		setName(name);
 		setAddress(address);
 		setWorkingTime(workingTime);
@@ -35,33 +36,33 @@ public class Restaurant {
 		return this.name;
 	}
 
-	public void setName(String name) throws IllegalNameException {
+	public void setName(String name) throws RestaurantException {
 		if (Methods.checkString(name)) {
 			this.name = name;
 		} else
-			throw new IllegalNameException();
+			throw new RestaurantException(ILLEGAL_RESTAURANT_NAME);
 	}
 
 	public String getAddress() {
 		return this.address;
 	}
 
-	public void setAddress(String address) throws NonExistingAddressException {
+	public void setAddress(String address) throws RestaurantException {
 		if (Methods.checkString(address)) {
 			this.address = address;
 		} else
-			throw new NonExistingAddressException();
+			throw new RestaurantException(ILLEGAL_ADDRESS_NAME);
 	}
 
 	public String getWorkingTime() {
 		return this.workingTime;
 	}
 
-	public void setWorkingTime(String workingTime) throws IllegalWorkingTimeException {
+	public void setWorkingTime(String workingTime) throws RestaurantException {
 		if (Methods.checkString(workingTime) && Methods.checkWorkingHoures(workingTime)) {
 			this.workingTime = workingTime;
 		} else
-			throw new IllegalWorkingTimeException();
+			throw new RestaurantException(ILLEGAL_WORKING_TIME);
 	}
 
 	public boolean isActive() {
@@ -76,22 +77,22 @@ public class Restaurant {
 		return this.phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) throws IlleagalPhoneNumberException {
+	public void setPhoneNumber(String phoneNumber) throws RestaurantException {
 		if (Methods.checkString(phoneNumber) && Methods.checkPhoneNumber(phoneNumber)) {
 			this.phoneNumber = phoneNumber;
 		} else
-			throw new IlleagalPhoneNumberException();
+			throw new RestaurantException(ILLEGAL_PHONE_NUMBER);
 	}
 
 	public Menu getMenu() {
 		return menu;
 	}
 
-	public void setMenu(Menu menu) throws NonExistingMenuException {
+	public void setMenu(Menu menu) throws RestaurantException{
 		if (menu != null) {
 			this.menu = menu;
 		} else
-			throw new NonExistingMenuException();
+			throw new RestaurantException(NULL_VALUE_AS_MENU);
 	}
 
 	public boolean isDelivery() {

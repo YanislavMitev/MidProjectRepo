@@ -1,11 +1,11 @@
 package bg.dominos.models;
 
-import bg.dominos.exceptions.IllegalPriceException;
+import bg.dominos.exceptions.ItemException;
 
 public class Starter extends Item{
 	private String description;
 	
-	public Starter(String type, float price, String description) throws IllegalPriceException {
+	public Starter(String type, float price, String description) throws ItemException {
 		super(type, price);
 		setDescription(description);
 	}

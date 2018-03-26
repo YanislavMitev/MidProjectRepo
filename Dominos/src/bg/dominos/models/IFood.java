@@ -1,9 +1,8 @@
 package bg.dominos.models;
 
-import bg.dominos.exceptions.CannotAddIngredientException;
-import bg.dominos.exceptions.CannotRemoveIngredientException;
+import bg.dominos.exceptions.ItemException;
 
 public interface IFood {
-	public void addIngredient(Ingredient ingredient) throws CannotAddIngredientException;
-	public void removeIngredient(Ingredient ingredient) throws CannotRemoveIngredientException;
+	public void addIngredient(Ingredient ingredient) throws ItemException;
+	public void removeIngredient(Ingredient ingredient) throws ItemException;
 }

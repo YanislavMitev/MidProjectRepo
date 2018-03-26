@@ -7,23 +7,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import bg.dominos.exceptions.CannotAddToBasketException;
-import bg.dominos.exceptions.CannotRemoveFromBasketException;
-import bg.dominos.exceptions.ExistingAddressException;
-import bg.dominos.exceptions.IllegalAvatarException;
-import bg.dominos.exceptions.IllegalEMailException;
-import bg.dominos.exceptions.IllegalNameException;
-import bg.dominos.exceptions.IllegalPasswordException;
-import bg.dominos.exceptions.InvalidQuantityException;
-import bg.dominos.exceptions.NonExistingAddressException;
-import bg.dominos.exceptions.NullAddressException;
-import bg.dominos.exceptions.NullOrEmptyBasketException;
+import bg.dominos.exceptions.AddressException;
+import bg.dominos.exceptions.BasketException;
+import bg.dominos.exceptions.ItemException;
+import bg.dominos.exceptions.UserException;
 import bg.dominos.models.Address;
 import bg.dominos.models.Item;
 import bg.dominos.models.Order;
 import bg.dominos.utils.Methods;
 
 public final class User implements IUser {
+	private static final String NULL_BASKET = "Null basket as value";
+	private static final String NULL_ADDRESS_AS_VALUE = "Null address as value";
+	private static final String NON_EXISTING_ADDRESS = "Non-existing address";
+	private static final String EXISTING_ADDRESS = "Existing address";
+	private static final String ILLEGAL_LAST_NAME = "Illegal last name";
+	private static final String ILLEGAL_FIRST_NAME = "Illegal first name";
+	private static final String ILLEGAL_AVATAR = "Illegal avatar";
 	private static final String CANNOT_ADD_TO_BASKET = "Cannot add to basket.";
 	private static final String CANNOT_REMOVE_FROM_BASKET = "Cannot remove from basket.";
 	private static final String EMPTY_BASKET = "Empty basket.";
@@ -40,7 +40,7 @@ public final class User implements IUser {
 			return indexOfItem;
 		}
 
-		public void addToBasket(Item item) throws InvalidQuantityException, CannotAddToBasketException {
+		public void addToBasket(Item item) throws ItemException, BasketException {
 			if (!Methods.isNull(item)) {
 				if (this.items.contains(item)) {
 					int indexOfItem = getIndexOfItem(item);
@@ -50,23 +50,23 @@ public final class User implements IUser {
 					this.items.add(item);
 				}
 			} else
-				throw new CannotAddToBasketException(CANNOT_ADD_TO_BASKET);
+				throw new BasketException(CANNOT_ADD_TO_BASKET);
 		}
 
-		public void removeFromBasket(Item item) throws CannotRemoveFromBasketException {
+		public void removeFromBasket(Item item) throws BasketException {
 			if (!Methods.isNull(item)) {
 				if (this.items.contains(item)) {
 					this.items.remove(getIndexOfItem(item));
 				}
 			}
-			throw new CannotRemoveFromBasketException(CANNOT_REMOVE_FROM_BASKET);
+			throw new BasketException(CANNOT_REMOVE_FROM_BASKET);
 		}
 
-		public void emptyBasket() throws NullOrEmptyBasketException {
+		public void emptyBasket() throws BasketException {
 			if (!this.items.isEmpty()) {
 				this.items.clear();
 			} else
-				throw new NullOrEmptyBasketException(EMPTY_BASKET);
+				throw new BasketException(EMPTY_BASKET);
 		}
 	}
 
@@ -81,7 +81,7 @@ public final class User implements IUser {
 	private Basket basket;
 
 	public User(String firstName, String lastName, String eMail, String password)
-			throws IllegalPasswordException, IllegalEMailException, IllegalNameException {
+			throws UserException {
 
 		setFirstName(firstName);
 		setLastName(lastName);
@@ -93,25 +93,25 @@ public final class User implements IUser {
 		this.setLoggedIn(false);
 		// check for log in each method
 	}
-
+	
 	@Override
-	public void addAddress(Address address) throws ExistingAddressException {
+	public void addAddress(Address address) throws AddressException {
 		if (!Methods.isNull(address) && !this.addresses.contains(address)) {
 			this.addresses.add(address);
 		} else
-			throw new ExistingAddressException();
+			throw new AddressException(EXISTING_ADDRESS);
 	}
 
 	@Override
-	public void deleteAddress(Address address) throws NonExistingAddressException, NullAddressException {
+	public void deleteAddress(Address address) throws AddressException {
 		if (!Methods.isNull(address)) {
 			if (this.addresses.contains(address)) {
 				this.addresses.remove(address);
 			} else {
-				throw new NonExistingAddressException();
+				throw new AddressException(NON_EXISTING_ADDRESS);
 			}
 		} else {
-			throw new NullAddressException();
+			throw new AddressException(NULL_ADDRESS_AS_VALUE);
 		}
 	}
 
@@ -136,33 +136,33 @@ public final class User implements IUser {
 		return this.firstName;
 	}
 
-	public void setFirstName(String firstName) throws IllegalNameException {
+	public void setFirstName(String firstName) throws UserException {
 		if (Methods.checkString(firstName)) {
 			this.firstName = firstName;
 		} else
-			throw new IllegalNameException();
+			throw new UserException(ILLEGAL_FIRST_NAME);
 	}
 
 	public String getLastName() {
 		return this.lastName;
 	}
 
-	public void setLastName(String lastName) throws IllegalNameException {
+	public void setLastName(String lastName) throws UserException {
 		if (Methods.checkString(lastName)) {
 			this.lastName = lastName;
 		} else
-			throw new IllegalNameException();
+			throw new UserException(ILLEGAL_LAST_NAME);
 	}
 
 	public String getEMail() {
 		return this.eMail;
 	}
 
-	public void setEMail(String eMail) throws IllegalEMailException {
+	public void setEMail(String eMail) throws UserException {
 		if (Methods.checkString(eMail)) {
 			this.eMail = eMail;
 		} else
-			throw new IllegalEMailException();
+			throw new UserException("Illegal e-mail");
 	}
 
 	public String getPassword() {
@@ -170,11 +170,11 @@ public final class User implements IUser {
 		return this.password;
 	}
 
-	public void setPassword(String password) throws IllegalPasswordException {
+	public void setPassword(String password) throws UserException {
 		if (Methods.checkString(password)) {
 			this.password = password;
 		} else
-			throw new IllegalPasswordException();
+			throw new UserException("Illegal password");
 	}
 
 	public Set<Address> getAddresses() {
@@ -185,22 +185,22 @@ public final class User implements IUser {
 		return this.avatar;
 	}
 
-	public void setAvatar(File avatar) throws IllegalAvatarException {
+	public void setAvatar(File avatar) throws UserException {
 		if (avatar.exists() && avatar.isFile()) {
 			this.avatar = avatar;
 		} else
-			throw new IllegalAvatarException();
+			throw new UserException(ILLEGAL_AVATAR);
 	}
 
 	public Basket getBasket() {
 		return this.basket;
 	}
 
-	public void setBasket(Basket basket) throws NullOrEmptyBasketException {
+	public void setBasket(Basket basket) throws BasketException {
 		if (!Methods.isNull(basket)) {
 			this.basket = basket;
 		} else
-			throw new NullOrEmptyBasketException();
+			throw new BasketException(NULL_BASKET);
 	}
 
 	@Override

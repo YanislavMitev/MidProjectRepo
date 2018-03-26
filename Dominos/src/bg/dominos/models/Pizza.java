@@ -1,6 +1,6 @@
 package bg.dominos.models;
 
-import bg.dominos.exceptions.IllegalTypeException;
+import bg.dominos.exceptions.ItemException;
 import bg.dominos.utils.Methods;
 
 public class Pizza extends Food {
@@ -33,11 +33,11 @@ public class Pizza extends Food {
 		this.dough = dough;
 	}
 	
-	private void setPizzaType(String pizzaType) throws IllegalTypeException {
+	private void setPizzaType(String pizzaType) throws ItemException {
 		if (Methods.checkString(pizzaType)) {
 			this.pizzaType = pizzaType;
 		} else
-			throw new IllegalTypeException(ILLEGAL_PIZZA_TYPE);
+			throw new ItemException(ILLEGAL_PIZZA_TYPE);
 	}
 
 	public String getPizzaType() {

@@ -1,10 +1,10 @@
 package bg.dominos.models;
 
-import bg.dominos.exceptions.IllegalPriceException;
+import bg.dominos.exceptions.ItemException;
 
 public class Sauce extends Item {
 
-	public Sauce(String type, float price) throws IllegalPriceException {
+	public Sauce(String type, float price) throws ItemException {
 		super(type, price);
 	}
 
