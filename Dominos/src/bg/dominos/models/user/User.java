@@ -27,53 +27,55 @@ public final class User implements IUser {
 	private static final String CANNOT_ADD_TO_BASKET = "Cannot add to basket.";
 	private static final String CANNOT_REMOVE_FROM_BASKET = "Cannot remove from basket.";
 	private static final String EMPTY_BASKET = "Empty basket.";
-	
-	private class Basket{
+
+	private class Basket {
 		private List<Item> items;
-		
+
 		public Basket() {
 			this.items = new ArrayList<Item>();
 		}
-		
+
 		private int getIndexOfItem(Item item) {
 			int indexOfItem = this.items.indexOf(item);
 			return indexOfItem;
 		}
-		
+
 		public void addToBasket(Item item) throws InvalidQuantityException, CannotAddToBasketException {
-			if(!Methods.isNull(item)) {
-				if(this.items.contains(item)) {
+			if (!Methods.isNull(item)) {
+				if (this.items.contains(item)) {
 					int indexOfItem = getIndexOfItem(item);
 					int increasedQuantity = this.items.get(indexOfItem).getQuantity() + 1;
 					this.items.get(indexOfItem).setQuantity(increasedQuantity);
-				}else {
+				} else {
 					this.items.add(item);
 				}
-			}else throw new CannotAddToBasketException(CANNOT_ADD_TO_BASKET);
+			} else
+				throw new CannotAddToBasketException(CANNOT_ADD_TO_BASKET);
 		}
-		
+
 		public void removeFromBasket(Item item) throws CannotRemoveFromBasketException {
-			if(!Methods.isNull(item)) {
-				if(this.items.contains(item)) {
+			if (!Methods.isNull(item)) {
+				if (this.items.contains(item)) {
 					this.items.remove(getIndexOfItem(item));
 				}
 			}
 			throw new CannotRemoveFromBasketException(CANNOT_REMOVE_FROM_BASKET);
 		}
-		
+
 		public void emptyBasket() throws NullOrEmptyBasketException {
-			if(!this.items.isEmpty()) {
+			if (!this.items.isEmpty()) {
 				this.items.clear();
-			}else throw new NullOrEmptyBasketException(EMPTY_BASKET);
+			} else
+				throw new NullOrEmptyBasketException(EMPTY_BASKET);
 		}
 	}
 
-	
 	private String firstName;
 	private String lastName;
 	private String eMail;
 	private String password;
 	private Set<Address> addresses;
+	private boolean isLoggedIn;
 	private List<Order> previousOrders;
 	private File avatar;
 	private Basket basket;
@@ -88,21 +90,9 @@ public final class User implements IUser {
 		this.addresses = new HashSet<Address>();
 		this.previousOrders = new ArrayList<Order>();
 		this.basket = new Basket();
+		this.setLoggedIn(false);
+		// check for log in each method
 	}
-
-
-//	@Override
-//	public void logIn(String userName, String password) {
-//		if (Methods.checkString(userName) && Methods.checkPassword(password)) {
-//			// TODO: check in JSON file if there is such user with password
-//		}
-//	}
-//
-//	@Override
-//	public void logOut() {
-//		// TODO: implement
-//
-//	}
 
 	@Override
 	public void addAddress(Address address) throws ExistingAddressException {
@@ -127,18 +117,18 @@ public final class User implements IUser {
 
 	@Override
 	public void changePassword(String oldPassword, String newPassword, String reenteredNewPassword) {
-		//TODO: implement
+		// TODO: implement
 	}
 
 	@Override
 	public void changeAvatar(File avatar) {
-		//TODO: implement
+		// TODO: implement
 
 	}
 
 	@Override
 	public void removeAvatar() {
-		//TODO: implement
+		// TODO: implement
 
 	}
 
@@ -175,7 +165,7 @@ public final class User implements IUser {
 			throw new IllegalEMailException();
 	}
 
-	private String getPassword() {
+	public String getPassword() {
 		// read form JSON
 		return this.password;
 	}
@@ -213,11 +203,41 @@ public final class User implements IUser {
 			throw new NullOrEmptyBasketException();
 	}
 
-	
-//	@Override
-//	public void register() {
-//		//TODO: implement
-//	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((eMail == null) ? 0 : eMail.hashCode());
+		return result;
+	}
 
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (eMail == null) {
+			if (other.eMail != null)
+				return false;
+		} else if (!eMail.equals(other.eMail))
+			return false;
+		return true;
+	}
+
+	public boolean isLoggedIn() {
+		return this.isLoggedIn;
+	}
+
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
+
+	@Override
+	public void logOut() {
+		this.setLoggedIn(false);
+	}
 }

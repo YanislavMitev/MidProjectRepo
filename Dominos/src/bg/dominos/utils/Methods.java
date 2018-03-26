@@ -3,6 +3,7 @@ package bg.dominos.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public abstract class Methods {
 	private static final int MAX_PASS_LENGTH = 25;
 	private static final int MIN_PASS_LENGTH = 5;
@@ -29,7 +30,7 @@ public abstract class Methods {
 	}
 
 	public static boolean checkPhoneNumber(String phoneNumber) {
-		Pattern pattern = Pattern.compile("0" + "\\d{9}");
+		Pattern pattern = Pattern.compile("0"+"[89]"+"[789]" + "\\d{6}");
 		Matcher matcher = pattern.matcher(phoneNumber);
 		if (matcher.matches()) {
 			return true;
@@ -45,4 +46,5 @@ public abstract class Methods {
 		}
 		return false;
 	}
+	
 }

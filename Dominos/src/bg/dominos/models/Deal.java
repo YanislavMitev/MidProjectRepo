@@ -3,21 +3,19 @@ package bg.dominos.models;
 import java.util.Collections;
 import java.util.List;
 
-import bg.dominos.exceptions.IllegalListException;
 import bg.dominos.exceptions.IllegalNameException;
 import bg.dominos.exceptions.IllegalPriceException;
 import bg.dominos.utils.Methods;
 
 public class Deal {
 	private static final String ILLEGAL_DEAL_NAME = "Illegal name";
-	private static final String ILLEGAL_DEAL_ITEMS = "Illegal deal items";
 	private static final String ILLEGAL_DEAL_PRICE = "Illegal deal price";
 	private String dealName;
 	private List<Item> dealItems;
 	private float dealPrice;
 	
 	public Deal(String dealName, List<Item> dealItems, float dealPrice)
-			throws IllegalNameException, IllegalListException, IllegalPriceException {
+			throws IllegalNameException, IllegalPriceException {
 		setDealName(dealName);
 		setDealItems(dealItems);
 		setDealPrice(dealPrice);
@@ -38,10 +36,10 @@ public class Deal {
 		return Collections.unmodifiableList(this.dealItems);
 	}
 
-	public void setDealItems(List<Item> dealItems) throws IllegalListException{
+	public void setDealItems(List<Item> dealItems){
 		if(!Methods.isNull(dealItems) && this.dealItems.isEmpty()) {
 			this.dealItems = dealItems;
-		}else throw new IllegalListException(ILLEGAL_DEAL_ITEMS);
+		}
 	}
 
 	public float getDealPrice() {
