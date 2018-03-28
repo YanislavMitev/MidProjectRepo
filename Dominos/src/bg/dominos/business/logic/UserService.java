@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import bg.dominos.exceptions.UserException;
 import bg.dominos.models.user.User;
 
 public final class UserService implements IUserService {
@@ -31,22 +32,22 @@ public final class UserService implements IUserService {
 	}
 
 	@Override
-	public void register(String firstName, String lastName, String eMail, String password) throws Exception {
+	public void register(String firstName, String lastName, String eMail, String password) throws UserException {
 		User user = new User(firstName, lastName, eMail, password);
 		
 		if(!(this.reigsteredUsers.contains(user))) {
 			this.reigsteredUsers.add(user);
 		}
-		//else throws new UserException;
+		else throw new UserException("Existing user.");
 	}
 
 	@Override
-	public void logIn(String eMail, String password) {
+	public void logIn(String eMail, String password) throws UserException{
 		for(User user : reigsteredUsers) {
 			if(user.getEMail().equals(eMail)&& user.getPassword().equals(password)) {
 				user.setLoggedIn(true);
 			}
-			//else throw InvalidTryToLogInException();
+			else throw new UserException("Invalid credentials.");
 		}
 	}
 
