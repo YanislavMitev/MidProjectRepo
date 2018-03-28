@@ -1,7 +1,7 @@
 package bg.dominos.business.logic;
 
 public interface IUserService {
-	public static final String PATH_REGISTERED_USERS ="src/registeredUsers";
+	public static final String PATH_REGISTERED_USERS ="src/files";
 
 	public void extractUsers() throws Exception;
 
