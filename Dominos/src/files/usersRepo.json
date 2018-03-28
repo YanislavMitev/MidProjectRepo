@@ -2,18 +2,6 @@
   {
     "firstName": "Yanislav",
     "lastName": "Mitev",
-    "eMail": "yanislav11@gmail.com",
-    "password": "azSeKazvamKaktoMamaMeEKrystila",
-    "addresses": [],
-    "isLoggedIn": false,
-    "previousOrders": [],
-    "basket": {
-      "items": []
-    }
-  },
-  {
-    "firstName": "Yanislav",
-    "lastName": "Mitev",
     "eMail": "yanislav@gmail.com",
     "password": "azSeKazvamKaktoMamaMeEKrystila",
     "addresses": [],

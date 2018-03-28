@@ -3,7 +3,7 @@ package bg.dominos.business.logic;
 import bg.dominos.exceptions.UserException;
 
 public interface IUserService {
-	public static final String PATH_REGISTERED_USERS ="src/registeredUsers";
+	public static final String PATH_REGISTERED_USERS ="src/files";
 
 	public void extractUsers() throws Exception;
 
