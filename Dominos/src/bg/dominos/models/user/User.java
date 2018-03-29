@@ -1,6 +1,5 @@
 package bg.dominos.models.user;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,16 +16,6 @@ import bg.dominos.models.Order;
 import bg.dominos.utils.Methods;
 
 public final class User implements IUser {
-	private static final String NULL_BASKET = "Null basket as value";
-	private static final String NULL_ADDRESS_AS_VALUE = "Null address as value";
-	private static final String NON_EXISTING_ADDRESS = "Non-existing address";
-	private static final String EXISTING_ADDRESS = "Existing address";
-	private static final String ILLEGAL_LAST_NAME = "Illegal last name";
-	private static final String ILLEGAL_FIRST_NAME = "Illegal first name";
-	private static final String ILLEGAL_AVATAR = "Illegal avatar";
-	private static final String CANNOT_ADD_TO_BASKET = "Cannot add to basket.";
-	private static final String CANNOT_REMOVE_FROM_BASKET = "Cannot remove from basket.";
-	private static final String EMPTY_BASKET = "Empty basket.";
 
 	private class Basket {
 		private List<Item> items;
@@ -35,20 +24,19 @@ public final class User implements IUser {
 			this.items = new ArrayList<Item>();
 		}
 
-			}
+	}
 
 	private String firstName;
 	private String lastName;
 	private String eMail;
 	private String password;
 	private Set<Address> addresses;
-	private boolean isLoggedIn;
 	private List<Order> previousOrders;
-	private File avatar;
+	private String avatarPath;
 	private Basket basket;
+	private transient boolean isLoggedOn;
 
-	public User(String firstName, String lastName, String eMail, String password)
-			throws UserException {
+	public User(String firstName, String lastName, String eMail, String password) throws UserException {
 
 		setFirstName(firstName);
 		setLastName(lastName);
@@ -57,50 +45,20 @@ public final class User implements IUser {
 		this.addresses = new HashSet<Address>();
 		this.previousOrders = new ArrayList<Order>();
 		this.basket = new Basket();
-		this.setLoggedIn(false);
+		this.isLoggedOn = false;
 		// check for log in each method
-	}
-	
-	@Override
-	public void addAddress(Address address) throws AddressException {
-		if (!Methods.isNull(address) && !this.addresses.contains(address)) {
-			this.addresses.add(address);
-		} else
-			throw new AddressException(EXISTING_ADDRESS);
-	}
-
-	@Override
-	public void deleteAddress(Address address) throws AddressException {
-		if (!Methods.isNull(address)) {
-			if (this.addresses.contains(address)) {
-				this.addresses.remove(address);
-			} else {
-				throw new AddressException(NON_EXISTING_ADDRESS);
-			}
-		} else {
-			throw new AddressException(NULL_ADDRESS_AS_VALUE);
-		}
-	}
-
-	@Override
-	public void changePassword(String oldPassword, String newPassword, String reenteredNewPassword) {
-		// TODO: implement
-	}
-
-	@Override
-	public void changeAvatar(File avatar) {
-		// TODO: implement
-
-	}
-
-	@Override
-	public void removeAvatar() {
-		// TODO: implement
-
 	}
 
 	public String getFirstName() {
 		return this.firstName;
+	}
+
+	public void setLogStatus(boolean isLoggedOn) {
+		this.isLoggedOn = isLoggedOn;
+	}
+
+	public boolean checkLogStatus() {
+		return this.isLoggedOn;
 	}
 
 	public void setFirstName(String firstName) throws UserException {
@@ -132,8 +90,34 @@ public final class User implements IUser {
 			throw new UserException("Illegal e-mail");
 	}
 
+	@Override
+	public void addAddress(Address address) throws AddressException, UserException {
+		if (this.checkLogStatus()) {
+			if (!Methods.isNull(address) && !this.addresses.contains(address)) {
+				this.addresses.add(address);
+			} else
+				throw new AddressException(IUser.EXISTING_ADDRESS);
+		} else
+			throw new UserException(IUser.LOGIN_FIRST);
+	}
+
+	@Override
+	public void deleteAddress(Address address) throws AddressException, UserException {
+		if (this.checkLogStatus()) {
+			if (!Methods.isNull(address)) {
+				if (this.addresses.contains(address)) {
+					this.addresses.remove(address);
+				} else {
+					throw new AddressException(IUser.NON_EXISTING_ADDRESS);
+				}
+			} else {
+				throw new AddressException(IUser.NULL_ADDRESS_AS_VALUE);
+			}
+		} else
+			throw new UserException(IUser.LOGIN_FIRST);
+	}
+
 	public String getPassword() {
-		// read form JSON
 		return this.password;
 	}
 
@@ -141,24 +125,22 @@ public final class User implements IUser {
 		if (Methods.checkString(password)) {
 			this.password = password;
 		} else
-			throw new UserException("Illegal password");
+			throw new UserException(ILLEGAL_PASSWORD);
 	}
 
 	public Set<Address> getAddresses() {
 		return Collections.unmodifiableSet(this.addresses);
 	}
 
-	public File getAvatar() {
-		return this.avatar;
+	public String getAvatarPath() {
+		return this.avatarPath;
 	}
-
-	public void setAvatar(File avatar) throws UserException {
-		if (avatar.exists() && avatar.isFile()) {
-			this.avatar = avatar;
-		} else
-			throw new UserException(ILLEGAL_AVATAR);
+	
+	public void setAvatarPath(String avatarPath) throws UserException {
+		if(Methods.checkString(avatarPath)) {
+			this.avatarPath = avatarPath;
+		}else throw new UserException(INVALID_AVATAR_PATH);
 	}
-
 	public Basket getBasket() {
 		return this.basket;
 	}
@@ -195,19 +177,6 @@ public final class User implements IUser {
 		return true;
 	}
 
-	public boolean isLoggedIn() {
-		return this.isLoggedIn;
-	}
-
-	public void setLoggedIn(boolean isLoggedIn) {
-		this.isLoggedIn = isLoggedIn;
-	}
-
-	@Override
-	public void logOut() {
-		this.setLoggedIn(false);
-	}
-	
 	private int getIndexOfItem(Item item) {
 		int indexOfItem = this.basket.items.indexOf(item);
 		return indexOfItem;
@@ -241,5 +210,9 @@ public final class User implements IUser {
 		} else
 			throw new BasketException(EMPTY_BASKET);
 	}
-
+	
+	@Override
+	public String toString() {
+		return "User [firstName = " + firstName + ", lastName = " + lastName + ", eMail = " + eMail + "]";
+	}
 }

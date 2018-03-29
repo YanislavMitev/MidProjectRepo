@@ -3,6 +3,8 @@ package bg.dominos.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import bg.dominos.models.user.User;
+
 
 public abstract class Methods {
 	private static final int MAX_PASS_LENGTH = 25;
@@ -43,6 +45,17 @@ public abstract class Methods {
 		Matcher matcher = pattern.matcher(workingTime);
 		if (matcher.matches()) {
 			return true;
+		}
+		return false;
+	}
+	
+	public static boolean passwordMatching(User user, String oldPass, String newPass, String reNewPass) {
+		if(!(checkString(oldPass) && checkString(newPass) && checkString(reNewPass))) {
+			if(user.getPassword().equals(oldPass)) {
+				if(newPass.equals(reNewPass)) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}

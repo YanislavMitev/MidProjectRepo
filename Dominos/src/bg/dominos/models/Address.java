@@ -17,8 +17,8 @@ public class Address {
 	private String street;
 	private String streetNumber;
 	private int postCode;
-	private Cities city;
-	private Restaurant restaurant;
+	private City city;
+	private transient Restaurant restaurant;
 	private String phoneNumber;
 	private int block;
 	private int entrance;
@@ -26,7 +26,7 @@ public class Address {
 	private int apartament;
 	private String bell;
 
-	public Address(String street, String streetNumber, int postCode, Cities city, Restaurant restaurant,
+	public Address(String street, String streetNumber, int postCode, City city, Restaurant restaurant,
 			String phoneNumber, int floor) {
 		this.street = street;
 		this.streetNumber = streetNumber;
@@ -112,11 +112,11 @@ public class Address {
 		}else throw new AddressException(ILLEGAL_POSTCODE);
 	}
 
-	public Cities getCity() {
+	public City getCity() {
 		return city;
 	}
 
-	public void setCity(Cities city) {
+	public void setCity(City city) {
 		this.city = city;
 	}
 

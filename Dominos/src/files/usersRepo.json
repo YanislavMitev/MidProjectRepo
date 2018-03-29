@@ -4,8 +4,30 @@
     "lastName": "Mitev",
     "eMail": "yanislav@gmail.com",
     "password": "azSeKazvamKaktoMamaMeEKrystila",
+    "addresses": [
+      {
+        "street": "Daskal Manol",
+        "streetNumber": "18",
+        "postCode": 1606,
+        "city": "SOFIA",
+        "phoneNumber": "0899716512",
+        "block": 0,
+        "entrance": 0,
+        "floor": 1,
+        "apartament": 0
+      }
+    ],
+    "previousOrders": [],
+    "basket": {
+      "items": []
+    }
+  },
+  {
+    "firstName": "ivan",
+    "lastName": "ivan",
+    "eMail": "ivan@abv.bg",
+    "password": "12345678",
     "addresses": [],
-    "isLoggedIn": false,
     "previousOrders": [],
     "basket": {
       "items": []

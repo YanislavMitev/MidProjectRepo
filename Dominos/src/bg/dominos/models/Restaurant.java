@@ -118,5 +118,9 @@ public class Restaurant {
 	public void setEatingPlaces(boolean eatingPlaces) {
 		this.eatingPlaces = eatingPlaces;
 	}
-
+	@Override
+	public String toString() {
+		return "Restaurant [name = " + name + ", address = " + address + ", workingTime = " + workingTime + ", active = "
+				+ active + "]";
+	}
 }
