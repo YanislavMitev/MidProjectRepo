@@ -1,5 +1,7 @@
 package bg.dominos.business.logic;
 
+import bg.dominos.exceptions.UserException;
+
 public interface IUserService {
 	public static final String PATH_REGISTERED_USERS ="src/files";
 
@@ -9,6 +11,6 @@ public interface IUserService {
 
 	public void register(String firstName, String lastName, String eMail, String password) throws Exception;
 
-	public void logIn(String eMail, String password);
+	public void logIn(String eMail, String password) throws UserException;
 
 }
