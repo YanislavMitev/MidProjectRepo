@@ -1,10 +1,14 @@
 package bg.dominos.business.logic;
 
+import java.net.MalformedURLException;
+
 import bg.dominos.exceptions.UserException;
 
 public interface IUserService {
-	public static final String PATH_REGISTERED_USERS ="src/files";
-
+	public static final String FILES_PATH = "src/files";
+	
+	public void extractRestaurants();
+	
 	public void extractUsers() throws Exception;
 
 	public void saveChangesToUsers() throws Exception;
@@ -13,4 +17,13 @@ public interface IUserService {
 
 	public void logIn(String eMail, String password) throws UserException;
 
+	public void logOut() throws UserException;
+
+	public void changePassword(String oldPassword, String newPassword, String reenteredNewPassword) throws UserException;
+
+	public void changeAvatar(String avatarPath) throws MalformedURLException;
+
+	public void removeAvatar();
+	
+	public void order();
 }

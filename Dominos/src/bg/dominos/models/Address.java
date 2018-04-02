@@ -18,7 +18,9 @@ public class Address {
 	private String streetNumber;
 	private int postCode;
 	private City city;
-	private Restaurant restaurant;
+
+	private transient Restaurant restaurant;
+
 	private String phoneNumber;
 	private int block;
 	private int entrance;

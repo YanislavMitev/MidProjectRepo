@@ -118,6 +118,11 @@ public class Restaurant {
 	public void setEatingPlaces(boolean eatingPlaces) {
 		this.eatingPlaces = eatingPlaces;
 	}
+	@Override
+	public String toString() {
+		return "Restaurant [name = " + name + ", address = " + address + ", workingTime = " + workingTime + ", active = "
+				+ active + "]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -129,7 +134,7 @@ public class Restaurant {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -149,7 +154,6 @@ public class Restaurant {
 			return false;
 		return true;
 	}
-	
-	
+	}
 
 }
