@@ -30,9 +30,9 @@ public class Pasta extends Food {
 	
 	public static List<Pasta> getPastas() throws Exception{
 		if(pastas.isEmpty()) {
-			pastas.add(new Pasta("Carbonara", 6.8f, 1, 440f));
-			pastas.add(new Pasta("Napolien", 6.8f, 1, 400f));
-			pastas.add(new Pasta("Pasta Pepperoni", 6.8f, 1, 410f));
+			pastas.add(new Pasta("Carbonara", 6.8f, 1, 0.440f));
+			pastas.add(new Pasta("Napolien", 6.8f, 1, 0.400f));
+			pastas.add(new Pasta("Pasta Pepperoni", 6.8f, 1, 0.410f));
 		}
 		return Collections.unmodifiableList(pastas);
 	}

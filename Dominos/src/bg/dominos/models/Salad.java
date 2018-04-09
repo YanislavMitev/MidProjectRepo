@@ -8,6 +8,10 @@ import bg.dominos.exceptions.ItemException;
 import bg.dominos.utils.Utils;
 
 public class Salad extends Food {
+	public String getDescription() {
+		return description;
+	}
+
 	private static final String TYPE = "Salad";
 	private String saladType;
 	private static List<Salad> salads = new ArrayList<Salad>();
@@ -47,11 +51,11 @@ public class Salad extends Food {
 			String description4 = "Iceberg, carrot, chicken, corn, croutons, Parmesan cheese, Caesar dressing";
 			String description5 = "Iceberg lettuce, tuna, corn, olives, lemon and olive oil";
 			
-			salads.add(new Salad("Rocket Salad", 5.3f, 1, 220f, description1));
-			salads.add(new Salad("Salad Tricolore", 5.3f, 1, 380f, description2));
-			salads.add(new Salad("Caesar's Bacon", 5.8f, 1, 330f, description3));
-			salads.add(new Salad("Caesar's Chicken", 5.8f, 1, 330f, description4));
-			salads.add(new Salad("Tuna Salad", 5.8f, 1, 280f, description5));
+			salads.add(new Salad("Rocket Salad", 5.3f, 1, 0.220f, description1));
+			salads.add(new Salad("Salad Tricolore", 5.3f, 1, 0.380f, description2));
+			salads.add(new Salad("Caesar's Bacon", 5.8f, 1, 0.330f, description3));
+			salads.add(new Salad("Caesar's Chicken", 5.8f, 1, 0.330f, description4));
+			salads.add(new Salad("Tuna Salad", 5.8f, 1, 0.280f, description5));
 		}
 		
 		return Collections.unmodifiableList(salads);

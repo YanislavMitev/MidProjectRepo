@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.omg.Messaging.SyncScopeHelper;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -114,6 +112,7 @@ public final class UserService implements IUserService {
 			if (Utils.passwordMatching(this.user, oldPassword, newPassword, reenteredNewPassword)) {
 				try {
 					this.user.setPassword(reenteredNewPassword);
+					System.out.println("Password changed successfully!");
 				} catch (UserException e) {
 					e.getMessage();
 				}
@@ -123,16 +122,6 @@ public final class UserService implements IUserService {
 			throw new UserException("Null user passed as value.");
 	}
 
-	@Override
-	public void changeAvatar(String avatarPath) {
-		// TODO: implement
-	}
-
-	@Override
-	public void removeAvatar() {
-		// TODO: implement
-
-	}
 
 	@Override
 	public void extractUsers() throws Exception {
@@ -223,19 +212,22 @@ public final class UserService implements IUserService {
 		return this.user;
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public void order() {
-		System.out.println("Logout | Settings");
 		System.out.println(
-				"Pizza | Sandwich | Pasta | Salad | Starter | Appetizer | Chicken | Sauce | Dessert | Drink");
+				"Pizza | Sandwich | Pasta | Salad | Starter | Chicken | Sauce | Dessert | Drink | Back");
 		switch (new Scanner(System.in).next().toLowerCase()) {
 		case "pizza":
 			try (Scanner input = new Scanner(System.in);) {
-				System.out.println(Pizza.getPizzaList());
+				
+				for(Pizza p : Pizza.getPizzaList()) {
+					System.out.println(p.getPizzaType() + " price: " + p.getPrice());
+				}
 				String pizza = input.nextLine().toLowerCase();
 				Pizza order = null;
 				for (Pizza p : Pizza.getPizzaList()) {
-					if (pizza.equals(p.getPizzaType())) {
+					if (pizza.equalsIgnoreCase(p.getPizzaType())) {
 						order = p;
 					}
 				}
@@ -247,11 +239,14 @@ public final class UserService implements IUserService {
 			} catch (ItemException | BasketException e) {
 				e.printStackTrace();
 			}
-			System.out.println(Pizza.getPizzaList());
 			break;
 		case "sandwich": {
 			try (Scanner input = new Scanner(System.in);) {
-				System.out.println(Sandwich.getSandwiches());
+				for(Sandwich s : Sandwich.getSandwiches()) {
+					System.out.println(s.getSandwichType() + " price: " + s.getPrice());
+					System.out.println(s.getDescription());
+					System.out.println("Weight: " + s.getWeight() + " kg.");
+				}
 				String sandwich = input.nextLine().toLowerCase();
 				Sandwich order = null;
 				for (Sandwich s : Sandwich.getSandwiches()) {
@@ -270,7 +265,10 @@ public final class UserService implements IUserService {
 		}
 		case "pasta":
 			try (Scanner input = new Scanner(System.in)) {
-				System.out.println(Pasta.getPastas());
+				for(Pasta p : Pasta.getPastas()) {
+					System.out.println(p.getPastaType() + " price: " + p.getPrice());
+					System.out.println("Weight: " + p.getWeight() + " kg.");
+				}
 				String pasta = input.nextLine().toLowerCase();
 				Pasta order = null;
 				for (Pasta p : Pasta.getPastas()) {
@@ -288,7 +286,13 @@ public final class UserService implements IUserService {
 			break;
 		case "salad":
 			try (Scanner input = new Scanner(System.in)) {
-				System.out.println(Salad.getSalads());
+				
+				for(Salad s : Salad.getSalads()) {
+					System.out.println(s.getSaladType()+ " price: " + s.getPrice());
+					System.out.println(s.getDescription());
+					System.out.println("Weight: " + s.getWeight() + " kg.");
+				}
+				
 				String salad = input.nextLine().toLowerCase();
 				Salad order = null;
 				for (Salad s : Salad.getSalads()) {
@@ -306,7 +310,8 @@ public final class UserService implements IUserService {
 			break;
 		case "starter":
 			try (Scanner input = new Scanner(System.in);) {
-				System.out.println(Starter.getInstance());
+				System.out.println(Starter.getInstance().getType() + "Price: " + Starter.getInstance().getPrice() + " lv.");
+				System.out.println(Starter.getInstance().getDescription());
 				System.out.println("Add to basket: YES/NO");
 				String choice = input.next();
 				if (choice.equalsIgnoreCase("yes")) {
@@ -326,7 +331,12 @@ public final class UserService implements IUserService {
 			break;
 		case "chicken":
 			try (Scanner input = new Scanner(System.in);) {
-				System.out.println(Chicken.getListWithChicken());
+				
+				for(Chicken c : Chicken.getListWithChicken()) {
+					System.out.println(c.getChickenType() + " price: " + c.getPrice());
+					System.out.println(c.getDescription());
+				}
+				
 				String chicken = input.nextLine().toLowerCase();
 				Chicken order = null;
 				for (Chicken c : Chicken.getListWithChicken()) {
@@ -344,7 +354,11 @@ public final class UserService implements IUserService {
 			break;
 		case "sauce":
 			try (Scanner input = new Scanner(System.in);) {
-				System.out.println(Sauce.getSauces());
+				
+				for(Sauce s : Sauce.getSauces()) {
+					System.out.println(s.getSauceType()+ " price: " + s.getPrice());
+				}
+				
 				String sauce = input.nextLine().toLowerCase();
 				Sauce order = null;
 				for (Sauce s : Sauce.getSauces()) {
@@ -363,6 +377,12 @@ public final class UserService implements IUserService {
 		case "dessert":
 			try (Scanner input = new Scanner(System.in);) {
 				System.out.println(Dessert.getDesserts());
+				
+				for(Dessert d : Dessert.getDesserts()) {
+					System.out.println(d.getDessertType() + " price: " + d.getPrice());
+				}
+				
+				
 				String dessert = input.nextLine().toLowerCase();
 				Dessert order = null;
 				for (Dessert d : Dessert.getDesserts()) {
@@ -380,7 +400,11 @@ public final class UserService implements IUserService {
 			break;
 		case "drink":
 			try (Scanner input = new Scanner(System.in);) {
-				System.out.println(Drink.getDrinks());
+				
+				for(Drink d : Drink.getDrinks()) {
+					System.out.println(d.getDrinkType() + " price: " + d.getPrice());
+				}
+				
 				String drink = input.nextLine().toLowerCase();
 				Drink order = null;
 				for (Drink d : Drink.getDrinks()) {
@@ -396,31 +420,25 @@ public final class UserService implements IUserService {
 				e.printStackTrace();
 			}
 			break;
-		case "logout":
-			try (Scanner input = new Scanner(System.in);) {
-				System.out.println("Do you realy wish to logout ? YES/NO");
+		case "back":
+				Scanner input = new Scanner(System.in);
+				System.out.println("Do you realy wish to go to previous page? YES/NO");
 				String choice = input.next();
 				if (choice.equalsIgnoreCase("yes")) {
-					userService.logOut();
-					System.out.println("You were successfully logged out.");
-					Loader.getInstance().loadHomePage();
+					Loader.getInstance().pageAfterLogin();
 				} else {
 					order();
 				}
-			} catch (UserException e) {
-				e.printStackTrace();
-			}
 			break;
-		case "settings": 
-			
-			//finish it ...
 		default:
 			System.out.println("Invalid option");
 			order();
 			break;
 		}
 	}
-
+	
+	
+	
 	private void chooseAmounAndProceed(Scanner input, Item order) throws ItemException, BasketException {
 		System.out.print("Choose quantity: ");
 		int amount = input.nextInt();
@@ -434,6 +452,7 @@ public final class UserService implements IUserService {
 		userService.getLoggedUser().saveLastOrder(userService.getLoggedUser().getBasketItems());
 		userService.getLoggedUser().emptyBasket();
 		System.out.println(ORDER_IS_PROCESSING);
+		Loader.getInstance().pageAfterLogin();
 	}
 
 }

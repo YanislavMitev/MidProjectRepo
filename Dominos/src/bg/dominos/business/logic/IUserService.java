@@ -1,7 +1,5 @@
 package bg.dominos.business.logic;
 
-import java.net.MalformedURLException;
-
 import bg.dominos.exceptions.UserException;
 
 public interface IUserService {
@@ -21,9 +19,5 @@ public interface IUserService {
 
 	public void changePassword(String oldPassword, String newPassword, String reenteredNewPassword) throws UserException;
 
-	public void changeAvatar(String avatarPath) throws MalformedURLException;
-
-	public void removeAvatar();
-	
 	public void order();
 }

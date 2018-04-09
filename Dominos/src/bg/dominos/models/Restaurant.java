@@ -141,10 +141,6 @@ public class Restaurant {
 			return false;
 		return true;
 	}
-<<<<<<< HEAD
-	
-=======
 	}
 
->>>>>>> aca44e8fdf06433ba9859cd216bd6c54c2b9422f
 }

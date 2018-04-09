@@ -16,6 +16,7 @@ public class Chicken extends Item {
 	private static List<Chicken> chicken = new ArrayList<Chicken>(4);
 	private String description;
 	private String chickenType;
+	
 	private Chicken(String chickenType, float price, String description) throws ItemException {
 		super(TYPE, price);
 		setDescription(description);

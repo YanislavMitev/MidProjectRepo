@@ -33,7 +33,6 @@ public final class User implements IUser {
 	private String password;
 	private Set<Address> addresses;
 	private Map<Integer, List<Item>> previousOrders;
-	private String avatarPath;
 	private Basket basket;
 	private transient boolean isLoggedOn;
 
@@ -133,15 +132,6 @@ public final class User implements IUser {
 		return Collections.unmodifiableSet(this.addresses);
 	}
 
-	public String getAvatarPath() {
-		return this.avatarPath;
-	}
-	
-	public void setAvatarPath(String avatarPath) throws UserException {
-		if(Utils.checkString(avatarPath)) {
-			this.avatarPath = avatarPath;
-		}else throw new UserException(INVALID_AVATAR_PATH);
-	}
 	public Basket getBasket() {
 		return this.basket;
 	}
@@ -224,5 +214,9 @@ public final class User implements IUser {
 	
 	public List<Item> getBasketItems(){
 		return Collections.unmodifiableList(getBasket().items);
+	}
+	
+	public Map<Integer, List<Item>> getPreviousOreders(){
+		return Collections.unmodifiableMap(this.previousOrders);
 	}
 }

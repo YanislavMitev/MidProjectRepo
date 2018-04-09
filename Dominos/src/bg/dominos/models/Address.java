@@ -28,13 +28,12 @@ public class Address {
 	private int apartament;
 	private String bell;
 
-	public Address(String street, String streetNumber, int postCode, City city, Restaurant restaurant,
+	public Address(String street, String streetNumber, int postCode, City city,
 			String phoneNumber, int floor) {
 		this.street = street;
 		this.streetNumber = streetNumber;
 		this.postCode = postCode;
 		this.city = city;
-		this.restaurant = restaurant;
 		this.phoneNumber = phoneNumber;
 		this.floor = floor;
 	}

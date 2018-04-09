@@ -1,12 +1,12 @@
 package bg.dominos.models;
 
 public enum Size {
-	MEDIUM(400, 7.9f),LAGRGE(600, 10.9f),JUMBO(900, 14.9f);
+	MEDIUM(0.400f, 7.9f),LAGRGE(0.600f, 10.9f),JUMBO(0.900f, 14.9f);
 	
-	private int weight;
+	private float weight;
 	private float price;
 	
-	Size(int weigth, float price){
+	Size(float weigth, float price){
 		this.price = price;
 		this.weight = weigth;
 	}
@@ -15,7 +15,7 @@ public enum Size {
 		return this.price;
 	}
 	
-	public int getWeight() {
+	public float getWeight() {
 		return this.weight;
 	}
 }
