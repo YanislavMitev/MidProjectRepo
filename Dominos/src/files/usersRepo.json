@@ -17,7 +17,7 @@
         "apartament": 0
       }
     ],
-    "previousOrders": [],
+    "previousOrders": {},
     "basket": {
       "items": []
     }
@@ -28,7 +28,29 @@
     "eMail": "ivan@abv.bg",
     "password": "12345678",
     "addresses": [],
-    "previousOrders": [],
+    "previousOrders": {},
+    "basket": {
+      "items": []
+    }
+  },
+  {
+    "firstName": "admin1",
+    "lastName": "admin1",
+    "eMail": "admin1",
+    "password": "admin1",
+    "addresses": [],
+    "previousOrders": {},
+    "basket": {
+      "items": []
+    }
+  },
+  {
+    "firstName": "niki",
+    "lastName": "niki",
+    "eMail": "niki",
+    "password": "niki",
+    "addresses": [],
+    "previousOrders": {},
     "basket": {
       "items": []
     }

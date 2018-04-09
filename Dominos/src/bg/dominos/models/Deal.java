@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import bg.dominos.exceptions.DealException;
-import bg.dominos.utils.Methods;
+import bg.dominos.utils.Utils;
 
 public class Deal {
 	private static final String INVALID_DESCRIPTION = "Invalid description";
@@ -30,7 +30,7 @@ public class Deal {
 	}
 
 	public void setDealName(String dealName) throws DealException {
-		if(Methods.checkString(dealName)) {
+		if(Utils.checkString(dealName)) {
 			this.dealName = dealName;
 		}else throw new DealException(ILLEGAL_DEAL_NAME);
 	}
@@ -40,7 +40,7 @@ public class Deal {
 	}
 
 	public void setDealItems(List<Item> dealItems) throws DealException{
-		if(!Methods.isNull(dealItems) && this.dealItems.isEmpty()) {
+		if(!Utils.isNull(dealItems) && this.dealItems.isEmpty()) {
 			this.dealItems = dealItems;
 		}else throw new DealException(INVALID_LIST_ITEMS);
 	}
@@ -60,7 +60,7 @@ public class Deal {
 	}
 
 	public void setDescription(String description)throws DealException{
-		if(Methods.checkString(description)) {
+		if(Utils.checkString(description)) {
 			this.description = description;
 		}else throw new DealException(INVALID_DESCRIPTION);
 			

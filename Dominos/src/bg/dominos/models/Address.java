@@ -2,7 +2,7 @@ package bg.dominos.models;
 
 import bg.dominos.exceptions.AddressException;
 import bg.dominos.exceptions.RestaurantException;
-import bg.dominos.utils.Methods;
+import bg.dominos.utils.Utils;
 
 public class Address {
 	private static final String ILLEGAL_RESTAURANT = "Illegal restaurant";
@@ -53,7 +53,7 @@ public class Address {
 	@Override
 	public boolean equals(Object obj) {
 		Address other = null;
-		if(!Methods.isNull(obj) && obj instanceof Address) {
+		if(!Utils.isNull(obj) && obj instanceof Address) {
 			other = (Address)obj;
 		}else {
 			return false;
@@ -74,7 +74,7 @@ public class Address {
 	}
 
 	public void setName(String name) throws AddressException { 
-		if (Methods.checkString(name)) {
+		if (Utils.checkString(name)) {
 			this.name = name;
 		} else
 			throw new AddressException(ILLEGAL_ADDRESS_NAME);
@@ -85,7 +85,7 @@ public class Address {
 	}
 
 	public void setStreet(String street) throws AddressException { 
-		if (Methods.checkString(street)) {
+		if (Utils.checkString(street)) {
 			this.street = street;
 		} else
 			throw new AddressException(ILLEGAL_STREET_NAME);
@@ -96,7 +96,7 @@ public class Address {
 	}
 
 	public void setStreetNumber(String streetNumber) throws AddressException {
-		if (Methods.checkString(streetNumber)) {
+		if (Utils.checkString(streetNumber)) {
 			this.streetNumber = streetNumber;
 		} else
 			throw new AddressException(ILLEGAL_STREET_NUMBER);
@@ -126,7 +126,7 @@ public class Address {
 
 	public void setRestaurant(Restaurant restaurant) throws RestaurantException {
 		// check if restaurant exist
-		if(!Methods.isNull(restaurant)) {
+		if(!Utils.isNull(restaurant)) {
 			this.restaurant = restaurant;
 		}else throw new RestaurantException(ILLEGAL_RESTAURANT);
 	}
@@ -142,7 +142,7 @@ public class Address {
 	}
 
 	public void setPhoneNumber(String phoneNumber) throws AddressException {
-		if(Methods.checkPhoneNumber(phoneNumber)) {
+		if(Utils.checkPhoneNumber(phoneNumber)) {
 			this.phoneNumber = phoneNumber;
 		}else throw new AddressException(ILLEGAL_PHONE_NUMBER);
 	}
@@ -184,7 +184,7 @@ public class Address {
 	}
 
 	public void setBell(String bell) {
-		if(Methods.checkString(bell)) {
+		if(Utils.checkString(bell)) {
 			this.bell = bell;			
 		}else {
 			this.bell = "";

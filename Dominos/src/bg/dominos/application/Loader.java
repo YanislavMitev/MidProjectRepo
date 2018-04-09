@@ -26,6 +26,30 @@ public final class Loader {
 		return loader;
 	}
 
+	@SuppressWarnings("resource")
+	public void pageAfterLogin() {
+		System.out.println("---- Order ------- Settings ------- Log out ----");
+		switch (new Scanner(System.in).nextLine().toLowerCase()) {
+		case "order":
+			service.order();
+			break;
+		case "settings":
+			break;
+		case "log out":
+			try {
+				service.logOut();
+				loadHomePage();
+				break;
+			} catch (UserException e) {
+				e.printStackTrace();
+			}
+		default:
+			System.out.println("Invalid option.");
+			pageAfterLogin();
+			break;
+		}
+	}
+
 	public void loadHomePage() throws UserException {
 		Scanner sc = new Scanner(System.in);
 
@@ -36,6 +60,7 @@ public final class Loader {
 			case "login":
 				login(sc);
 				System.out.println("Successfully logged in.");
+				pageAfterLogin();
 				// lead to next page
 				break;
 			case "register":
@@ -47,6 +72,9 @@ public final class Loader {
 					e.printStackTrace();
 				}
 				login(sc);
+				if(service.getLoggedUser() != null) {
+					pageAfterLogin();
+				}
 				break;
 			case "exit":
 				try {
@@ -86,7 +114,7 @@ public final class Loader {
 		}
 	}
 
-	private void login(Scanner sc)  {
+	private void login(Scanner sc) {
 		System.out.print("E-mail: ");
 		String email = sc.next();
 		System.out.print("Password: ");
@@ -98,5 +126,6 @@ public final class Loader {
 			login(sc);
 		}
 	}
+
 
 }

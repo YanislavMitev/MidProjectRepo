@@ -1,7 +1,7 @@
 package bg.dominos.models;
 
 import bg.dominos.exceptions.ItemException;
-import bg.dominos.utils.Methods;
+import bg.dominos.utils.Utils;
 
 public abstract class Item {
 	private static final String ILLEGAL_PRICE = "Illegal price.";
@@ -29,7 +29,7 @@ public abstract class Item {
 	}
 
 	public void setType(String type) throws ItemException {
-		if(Methods.checkString(type)) {
+		if(Utils.checkString(type)) {
 			this.type = type;
 		}else throw new ItemException(ILLEGAL_FOOD_TYPE);
 	}

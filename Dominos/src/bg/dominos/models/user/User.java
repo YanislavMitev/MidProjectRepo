@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import bg.dominos.exceptions.AddressException;
 import bg.dominos.exceptions.BasketException;
@@ -12,18 +14,17 @@ import bg.dominos.exceptions.ItemException;
 import bg.dominos.exceptions.UserException;
 import bg.dominos.models.Address;
 import bg.dominos.models.Item;
-import bg.dominos.models.Order;
-import bg.dominos.utils.Methods;
+import bg.dominos.utils.Utils;
 
 public final class User implements IUser {
 
 	private class Basket {
-		private List<Item> items;
+		public List<Item> items;
 
 		public Basket() {
 			this.items = new ArrayList<Item>();
 		}
-
+		
 	}
 
 	private String firstName;
@@ -31,7 +32,7 @@ public final class User implements IUser {
 	private String eMail;
 	private String password;
 	private Set<Address> addresses;
-	private List<Order> previousOrders;
+	private Map<Integer, List<Item>> previousOrders;
 	private String avatarPath;
 	private Basket basket;
 	private transient boolean isLoggedOn;
@@ -43,7 +44,7 @@ public final class User implements IUser {
 		setEMail(eMail);
 		setPassword(password);
 		this.addresses = new HashSet<Address>();
-		this.previousOrders = new ArrayList<Order>();
+		this.previousOrders = new TreeMap<Integer, List<Item>>();
 		this.basket = new Basket();
 		this.isLoggedOn = false;
 		// check for log in each method
@@ -62,7 +63,7 @@ public final class User implements IUser {
 	}
 
 	public void setFirstName(String firstName) throws UserException {
-		if (Methods.checkString(firstName)) {
+		if (Utils.checkString(firstName)) {
 			this.firstName = firstName;
 		} else
 			throw new UserException(ILLEGAL_FIRST_NAME);
@@ -73,7 +74,7 @@ public final class User implements IUser {
 	}
 
 	public void setLastName(String lastName) throws UserException {
-		if (Methods.checkString(lastName)) {
+		if (Utils.checkString(lastName)) {
 			this.lastName = lastName;
 		} else
 			throw new UserException(ILLEGAL_LAST_NAME);
@@ -84,7 +85,7 @@ public final class User implements IUser {
 	}
 
 	public void setEMail(String eMail) throws UserException {
-		if (Methods.checkString(eMail)) {
+		if (Utils.checkString(eMail)) {
 			this.eMail = eMail;
 		} else
 			throw new UserException("Illegal e-mail");
@@ -93,7 +94,7 @@ public final class User implements IUser {
 	@Override
 	public void addAddress(Address address) throws AddressException, UserException {
 		if (this.checkLogStatus()) {
-			if (!Methods.isNull(address) && !this.addresses.contains(address)) {
+			if (!Utils.isNull(address) && !this.addresses.contains(address)) {
 				this.addresses.add(address);
 			} else
 				throw new AddressException(IUser.EXISTING_ADDRESS);
@@ -104,7 +105,7 @@ public final class User implements IUser {
 	@Override
 	public void deleteAddress(Address address) throws AddressException, UserException {
 		if (this.checkLogStatus()) {
-			if (!Methods.isNull(address)) {
+			if (!Utils.isNull(address)) {
 				if (this.addresses.contains(address)) {
 					this.addresses.remove(address);
 				} else {
@@ -122,7 +123,7 @@ public final class User implements IUser {
 	}
 
 	public void setPassword(String password) throws UserException {
-		if (Methods.checkString(password)) {
+		if (Utils.checkString(password)) {
 			this.password = password;
 		} else
 			throw new UserException(ILLEGAL_PASSWORD);
@@ -137,7 +138,7 @@ public final class User implements IUser {
 	}
 	
 	public void setAvatarPath(String avatarPath) throws UserException {
-		if(Methods.checkString(avatarPath)) {
+		if(Utils.checkString(avatarPath)) {
 			this.avatarPath = avatarPath;
 		}else throw new UserException(INVALID_AVATAR_PATH);
 	}
@@ -146,7 +147,7 @@ public final class User implements IUser {
 	}
 
 	public void setBasket(Basket basket) throws BasketException {
-		if (!Methods.isNull(basket)) {
+		if (!Utils.isNull(basket)) {
 			this.basket = basket;
 		} else
 			throw new BasketException(NULL_BASKET);
@@ -183,7 +184,7 @@ public final class User implements IUser {
 	}
 
 	public void addToBasket(Item item) throws ItemException, BasketException {
-		if (!Methods.isNull(item)) {
+		if (!Utils.isNull(item)) {
 			if (this.basket.items.contains(item)) {
 				int indexOfItem = getIndexOfItem(item);
 				int increasedQuantity = this.basket.items.get(indexOfItem).getQuantity() + 1;
@@ -196,7 +197,7 @@ public final class User implements IUser {
 	}
 
 	public void removeFromBasket(Item item) throws BasketException {
-		if (!Methods.isNull(item)) {
+		if (!Utils.isNull(item)) {
 			if (this.basket.items.contains(item)) {
 				this.basket.items.remove(getIndexOfItem(item));
 			}
@@ -214,5 +215,14 @@ public final class User implements IUser {
 	@Override
 	public String toString() {
 		return "User [firstName = " + firstName + ", lastName = " + lastName + ", eMail = " + eMail + "]";
+	}
+	public void saveLastOrder(List<Item> items) throws ItemException {
+		if(items!= null && !items.isEmpty()) {
+			this.previousOrders.put(previousOrders.size()+1, items);
+		}else throw new ItemException("Null item list.");
+	}
+	
+	public List<Item> getBasketItems(){
+		return Collections.unmodifiableList(getBasket().items);
 	}
 }

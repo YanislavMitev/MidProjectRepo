@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import bg.dominos.models.user.User;
 
 
-public abstract class Methods {
+public abstract class Utils {
 	private static final int MAX_PASS_LENGTH = 25;
 	private static final int MIN_PASS_LENGTH = 5;
 

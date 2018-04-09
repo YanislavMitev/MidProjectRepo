@@ -1,10 +1,9 @@
 package bg.dominos.models;
 
 import bg.dominos.exceptions.RestaurantException;
-import bg.dominos.utils.Methods;
+import bg.dominos.utils.Utils;
 
 public class Restaurant {
-	private static final String NULL_VALUE_AS_MENU = "Null value as menu";
 	private static final String ILLEGAL_WORKING_TIME = "Illegal working time";
 	private static final String ILLEGAL_ADDRESS_NAME = "Illegal address name";
 	private static final String ILLEGAL_RESTAURANT_NAME = "Illegal restaurant name";
@@ -14,19 +13,17 @@ public class Restaurant {
 	private String workingTime;
 	private boolean active;
 	private String phoneNumber;
-	private Menu menu;
 	private boolean delivery;
 	private boolean carryOut;
 	private boolean eatingPlaces;
 
-	public Restaurant(String name, String address, String workingTime, boolean active, String phoneNumber, Menu menu,
+	public Restaurant(String name, String address, String workingTime, boolean active, String phoneNumber,
 			boolean delivery, boolean carryOut, boolean eatingPlaces) throws RestaurantException {
 		setName(name);
 		setAddress(address);
 		setWorkingTime(workingTime);
 		setActive(active);
 		setPhoneNumber(phoneNumber);
-		setMenu(menu);
 		setDelivery(delivery);
 		setCarryOut(carryOut);
 		setEatingPlaces(eatingPlaces);
@@ -37,7 +34,7 @@ public class Restaurant {
 	}
 
 	public void setName(String name) throws RestaurantException {
-		if (Methods.checkString(name)) {
+		if (Utils.checkString(name)) {
 			this.name = name;
 		} else
 			throw new RestaurantException(ILLEGAL_RESTAURANT_NAME);
@@ -48,7 +45,7 @@ public class Restaurant {
 	}
 
 	public void setAddress(String address) throws RestaurantException {
-		if (Methods.checkString(address)) {
+		if (Utils.checkString(address)) {
 			this.address = address;
 		} else
 			throw new RestaurantException(ILLEGAL_ADDRESS_NAME);
@@ -59,7 +56,7 @@ public class Restaurant {
 	}
 
 	public void setWorkingTime(String workingTime) throws RestaurantException {
-		if (Methods.checkString(workingTime) && Methods.checkWorkingHoures(workingTime)) {
+		if (Utils.checkString(workingTime) && Utils.checkWorkingHoures(workingTime)) {
 			this.workingTime = workingTime;
 		} else
 			throw new RestaurantException(ILLEGAL_WORKING_TIME);
@@ -78,22 +75,12 @@ public class Restaurant {
 	}
 
 	public void setPhoneNumber(String phoneNumber) throws RestaurantException {
-		if (Methods.checkString(phoneNumber) && Methods.checkPhoneNumber(phoneNumber)) {
+		if (Utils.checkString(phoneNumber) && Utils.checkPhoneNumber(phoneNumber)) {
 			this.phoneNumber = phoneNumber;
 		} else
 			throw new RestaurantException(ILLEGAL_PHONE_NUMBER);
 	}
 
-	public Menu getMenu() {
-		return menu;
-	}
-
-	public void setMenu(Menu menu) throws RestaurantException{
-		if (menu != null) {
-			this.menu = menu;
-		} else
-			throw new RestaurantException(NULL_VALUE_AS_MENU);
-	}
 
 	public boolean isDelivery() {
 		return delivery;
@@ -118,13 +105,11 @@ public class Restaurant {
 	public void setEatingPlaces(boolean eatingPlaces) {
 		this.eatingPlaces = eatingPlaces;
 	}
-<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return "Restaurant [name = " + name + ", address = " + address + ", workingTime = " + workingTime + ", active = "
 				+ active + "]";
 	}
-=======
 
 	@Override
 	public int hashCode() {
@@ -157,7 +142,4 @@ public class Restaurant {
 		return true;
 	}
 	
-	
-
->>>>>>> 37a631c65c120bba8e2d8e362590eb353f5311cf
 }
