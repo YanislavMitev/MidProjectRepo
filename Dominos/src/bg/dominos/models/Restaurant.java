@@ -121,7 +121,7 @@ public class Restaurant {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) { {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -141,5 +141,10 @@ public class Restaurant {
 			return false;
 		return true;
 	}
+<<<<<<< HEAD
 	
+=======
+	}
+
+>>>>>>> aca44e8fdf06433ba9859cd216bd6c54c2b9422f
 }
