@@ -16,6 +16,7 @@ public abstract class Item {
 	
 	public Item(String type,float price) throws ItemException{
 		this.setPrice(price);
+		this.setType(type);
 	}
 	
 	public void setPrice(float price) throws ItemException {

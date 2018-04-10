@@ -10,23 +10,22 @@ import bg.dominos.utils.Utils;
 public class Dessert extends Item{
 	private static final float ICE_CREAM_PRICE = 2.99f;
 	private static final float DESSERT_PRICE = 5.5f;
-	private static final String TYPE = "Dessert";
 	private static List<Dessert> desserts = new ArrayList<Dessert>();
 	private String dessertType;
 	
 	private Dessert(String dessertType, float price) throws ItemException {
-		super(TYPE, price);
+		super(dessertType, price);
 		setDessertType(dessertType);
 	}
 
 	public String getDessertType() {
 		return this.dessertType;
 	}
-
+	
 	private void setDessertType(String dessertType) throws ItemException {
 		if(Utils.checkString(dessertType)) {
 			this.dessertType = dessertType;
-		}else throw new ItemException("Dessert: Invalid dessert type");
+		}else throw new ItemException("Illegal dessert type.");
 	}
 	
 	public static List<Dessert> getDesserts(){

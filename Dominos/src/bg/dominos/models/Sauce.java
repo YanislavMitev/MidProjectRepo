@@ -8,21 +8,19 @@ import bg.dominos.exceptions.ItemException;
 import bg.dominos.utils.Utils;
 
 public class Sauce extends Item {
-	private static final String TYPE = "Sauce";
 	private static final float SAUCE_PRICE = 2.0f;
 	private String sauceType;
 	private static List<Sauce> sauces = new ArrayList<Sauce>();
 
 	private Sauce(String sacueType, float price) throws ItemException {
-		super(TYPE, price);
-		setDipType(sauceType);
+		super(sacueType, price);
+		setSauceType(sacueType);
 	}
 
-	private void setDipType(String sauceType) throws ItemException {
-		if (Utils.checkString(sauceType)) {
+	private void setSauceType(String sauceType) throws ItemException {
+		if(Utils.checkString(sauceType)) {
 			this.sauceType = sauceType;
-		} else
-			throw new ItemException("Sauce: Invalid dip type.");
+		}else throw new ItemException("Illegal sauce type.");
 	}
 
 	public String getSauceType() {

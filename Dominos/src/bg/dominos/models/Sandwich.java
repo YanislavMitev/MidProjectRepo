@@ -8,23 +8,22 @@ import bg.dominos.exceptions.ItemException;
 import bg.dominos.utils.Utils;
 
 public class Sandwich extends Food {
-	private static final String TYPE = "Sandwich";
 	private static List<Sandwich> sandwiches = new ArrayList<Sandwich>();
 	private String sandwichType;
 	private String description;
 	
 	private Sandwich(String sandwichType, float price, int quantity, float weight, String description) throws Exception {
-		super(price, TYPE, quantity, weight);
+		super(price, sandwichType, quantity, weight);
 		setDescription(description);
 		setSandwichType(sandwichType);
 	}
 	
-	public void setSandwichType(String sandwichType) throws ItemException {
+	private void setSandwichType(String sandwichType) throws ItemException {
 		if(Utils.checkString(sandwichType)) {
 			this.sandwichType = sandwichType;
-		}else throw new ItemException("Sandwich: Invalid type.");
+		}else throw new ItemException("Illegal sandwich type.");
 	}
-	
+
 	public void setDescription(String description) throws ItemException {
 		if(Utils.checkString(description)) {
 			this.description = description;

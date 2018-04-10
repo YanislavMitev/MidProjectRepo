@@ -8,21 +8,21 @@ import bg.dominos.exceptions.ItemException;
 import bg.dominos.utils.Utils;
 
 public class Drink extends Item {
-	private static final String TYPE = "Drink";
 	private static List<Drink> drinks = new ArrayList<Drink>();
 	private String drinkType;
 	
 	private Drink(String drinkType, float price) throws ItemException {
-		super(TYPE, price);
+		super(drinkType, price);
 		setDrinkType(drinkType);
 	}
 
 	private void setDrinkType(String drinkType) throws ItemException {
 		if(Utils.checkString(drinkType)) {
 			this.drinkType = drinkType;
-		}else throw new ItemException("Drink: Invalid drink type");
+		}else throw new ItemException("Illegal drink type.");
+		
 	}
-	
+
 	public static List<Drink> getDrinks(){
 		if(drinks.isEmpty()) {
 			try {

@@ -11,19 +11,25 @@ public class Salad extends Food {
 	public String getDescription() {
 		return description;
 	}
-
-	private static final String TYPE = "Salad";
 	private String saladType;
 	private static List<Salad> salads = new ArrayList<Salad>();
 	private String description;
 	
 	private Salad(String saladType, float price, int quantity, float weight, String description)
 			throws Exception {
-		super(price, TYPE, quantity, weight);
-		setSaladType(saladType);
+		super(price, saladType, quantity, weight);
 		setDescription(description);
+		setSaladType(saladType);
 	}
 	
+
+	private void setSaladType(String saladType) throws ItemException {
+		if(Utils.checkString(saladType)) {
+			this.saladType = saladType;
+		}else throw new ItemException("Illegal salad type.");
+		
+	}
+
 
 	private void setDescription(String description) throws ItemException {
 		if(Utils.checkString(description)) {
@@ -32,11 +38,6 @@ public class Salad extends Food {
 	}
 
 
-	private void setSaladType(String saladType) throws ItemException {
-		if(Utils.checkString(saladType)) {
-			this.saladType = saladType;
-		}else throw new ItemException("Salad: Invalid type.");
-	}
 	
 	public String getSaladType() {
 		return this.saladType;

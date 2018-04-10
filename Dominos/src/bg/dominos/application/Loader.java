@@ -1,5 +1,6 @@
 package bg.dominos.application;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -78,17 +79,23 @@ public final class Loader {
 
 			System.out.println("Add new address? YES/NO");
 			if (input.next().toLowerCase().equals("yes")) {
-				System.out.print("Street:");
+				System.out.println("Street:");
+				input.nextLine();
 				String street = input.nextLine();
-				System.out.print("Street number:");
-				String streetNumber = input.next();
-				System.out.print("Post code:");
+				
+				System.out.println("Street number:");
+				String streetNumber = input.nextLine();
+				
+				System.out.println("Post code:");
 				int postCode = input.nextInt();
-				System.out.print("City:");
+				
+				System.out.println("City:");
 				City city = (input.next().equalsIgnoreCase("PLOVDIV")) ? City.PlOVDIV : City.SOFIA;
-				System.out.print("Phone number:");
+				
+				System.out.println("Phone number:");
 				String phoneNumber = input.next();
-				System.out.print("Floor:");
+				
+				System.out.println("Floor:");
 				int floor = input.nextInt();
 
 				try {
@@ -139,6 +146,15 @@ public final class Loader {
 	}
 
 	public void basketPage() {
+		if(service.getLoggedUser().getBasketItems().isEmpty()) {
+			System.out.println("Basket is empty.");
+			try {
+				Thread.sleep(2000);
+				pageAfterLogin();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		float price = 0.0f;
@@ -156,22 +172,20 @@ public final class Loader {
 		switch (input.nextLine().toLowerCase()) {
 		case "remove item":
 			System.out.println("Enter item's name...");
-			String itemName = input.nextLine();
+			String itemName = input.nextLine().toLowerCase();
 
-			Item itemToRemove = null;
-			for (Item item : service.getLoggedUser().getBasketItems()) {
+			for (Iterator<Item> it = service.getLoggedUser().getBasketItems().iterator(); it.hasNext();) {
+				Item item = it.next();
 				if (item.getType().equalsIgnoreCase(itemName)) {
-					itemToRemove = item;
+					try {
+						service.getLoggedUser().removeFromBasket(item);
+					} catch (BasketException e) {
+						e.printStackTrace();
+					}
+					break;
+				}else {
+					System.out.println("No such element");
 				}
-			}
-			if (itemToRemove != null) {
-				try {
-					service.getLoggedUser().removeFromBasket(itemToRemove);
-				} catch (BasketException e) {
-					e.printStackTrace();
-				}
-			}else {
-				System.out.println("No such item.");
 			}
 			basketPage();
 			break;
@@ -180,6 +194,7 @@ public final class Loader {
 			if(input.next().equalsIgnoreCase("yes")) {
 				try {
 					service.getLoggedUser().emptyBasket();
+					System.out.println("Empty basket.");
 					pageAfterLogin();
 				} catch (BasketException e) {
 					e.printStackTrace();

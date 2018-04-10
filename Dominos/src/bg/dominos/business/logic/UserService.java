@@ -231,7 +231,6 @@ public final class UserService implements IUserService {
 						order = p;
 					}
 				}
-				// choose size & dough
 				if (order == null) {
 					break;
 				}
@@ -310,7 +309,7 @@ public final class UserService implements IUserService {
 			break;
 		case "starter":
 			try (Scanner input = new Scanner(System.in);) {
-				System.out.println(Starter.getInstance().getType() + "Price: " + Starter.getInstance().getPrice() + " lv.");
+				System.out.println(Starter.getInstance().getType() + " Price: " + Starter.getInstance().getPrice() + " lv.");
 				System.out.println(Starter.getInstance().getDescription());
 				System.out.println("Add to basket: YES/NO");
 				String choice = input.next();

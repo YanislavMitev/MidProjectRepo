@@ -21,11 +21,11 @@ public final class User implements IUser {
 	private class Basket {
 		public List<Item> items;
 		private float totalPrice;
-		
+
 		public Basket() {
 			this.items = new ArrayList<Item>();
 		}
-		
+
 	}
 
 	private String firstName;
@@ -193,8 +193,7 @@ public final class User implements IUser {
 			if (this.basket.items.contains(item)) {
 				this.basket.items.remove(getIndexOfItem(item));
 			}
-		}
-		throw new BasketException(CANNOT_REMOVE_FROM_BASKET);
+		} else throw new BasketException(CANNOT_REMOVE_FROM_BASKET);
 	}
 
 	public void emptyBasket() throws BasketException {
@@ -203,25 +202,27 @@ public final class User implements IUser {
 		} else
 			throw new BasketException(EMPTY_BASKET);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [firstName = " + firstName + ", lastName = " + lastName + ", eMail = " + eMail + "]";
 	}
+
 	public void saveLastOrder(List<Item> items) throws ItemException {
-		if(items!= null && !items.isEmpty()) {
-			this.previousOrders.put(previousOrders.size()+1, items);
-		}else throw new ItemException("Null item list.");
+		if (items != null && !items.isEmpty()) {
+			this.previousOrders.put(previousOrders.size() + 1, items);
+		} else
+			throw new ItemException("Null item list.");
 	}
-	
-	public List<Item> getBasketItems(){
-		return Collections.unmodifiableList(getBasket().items);
+
+	public List<Item> getBasketItems() {
+		return Collections.unmodifiableList(this.basket.items);
 	}
-	
-	public Map<Integer, List<Item>> getPreviousOreders(){
+
+	public Map<Integer, List<Item>> getPreviousOreders() {
 		return Collections.unmodifiableMap(this.previousOrders);
 	}
-	
+
 	public float getTotalPrice() {
 		return this.basket.totalPrice;
 	}

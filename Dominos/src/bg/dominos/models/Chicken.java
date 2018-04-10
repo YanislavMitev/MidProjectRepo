@@ -11,25 +11,22 @@ public class Chicken extends Item {
 	public String getChickenType() {
 		return chickenType;
 	}
-	private static final String TYPE = "Chicken";
 	private static final String INVALID_DESCRIPTION = "Chicken: Invalid description";
 	private static List<Chicken> chicken = new ArrayList<Chicken>(4);
 	private String description;
 	private String chickenType;
 	
 	private Chicken(String chickenType, float price, String description) throws ItemException {
-		super(TYPE, price);
+		super(chickenType, price);
 		setDescription(description);
 		setChickenType(chickenType);
 	}
-	
-	
+
 	private void setChickenType(String chickenType) throws ItemException {
 		if(Utils.checkString(chickenType)) {
 			this.chickenType = chickenType;
-		}else throw new ItemException("Invalid chicken type.");
+		}else throw new ItemException("Illegal chicken type.");
 	}
-
 
 	private void setDescription(String description) throws ItemException {
 		if(Utils.checkString(description)) {

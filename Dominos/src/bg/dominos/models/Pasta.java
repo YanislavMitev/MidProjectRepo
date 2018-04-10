@@ -8,12 +8,11 @@ import bg.dominos.exceptions.ItemException;
 import bg.dominos.utils.Utils;
 
 public class Pasta extends Food {
-	private static final String TYPE = "Pasta";
 	private String pastaType;
 	private static List<Pasta> pastas = new ArrayList<Pasta>();
 	
 	private Pasta(String pastaType, float price, int quantity, float weight) throws Exception {
-		super(price, TYPE, quantity, weight);
+		super(price, pastaType, quantity, weight);
 		setPastaType(pastaType);
 	}
 	
@@ -21,9 +20,10 @@ public class Pasta extends Food {
 	private void setPastaType(String pastaType) throws ItemException {
 		if(Utils.checkString(pastaType)) {
 			this.pastaType = pastaType;
-		}else throw new ItemException("Pasta: Invalid type.");
+		}else throw new ItemException("Illegal pasta type.");
 	}
-	
+
+
 	public String getPastaType() {
 		return this.pastaType;
 	}

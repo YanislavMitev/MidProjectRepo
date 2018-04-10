@@ -9,8 +9,6 @@ import bg.dominos.utils.Utils;
 
 public class Pizza extends Food {
 	
-	private static final String TYPE = "Pizza";
-	private static final String ILLEGAL_PIZZA_TYPE = "Illegal pizza type";
 	private static final byte DEFAULT_QUANTITY = 1;
 	private static List<Pizza> pizzas = new ArrayList<Pizza>();
 	private String pizzaType;
@@ -18,12 +16,18 @@ public class Pizza extends Food {
 	private Dough dough;
 
 	private Pizza(String pizzaType, int quantity, Size size, Dough dough) throws Exception {
-		super(size.getPrice(), TYPE, quantity, size.getWeight());
+		super(size.getPrice(), pizzaType, quantity, size.getWeight());
 		setSize(size);
 		setDough(dough);
 		setPizzaType(pizzaType);
 	}
 	
+	private void setPizzaType(String pizzaType) throws ItemException {
+		if(Utils.checkString(pizzaType)) {
+			this.pizzaType = pizzaType;
+		}else throw new ItemException("Illegal pizza type.");
+	}
+
 	public Size getSize() {
 		return this.size;
 	}
@@ -39,14 +43,6 @@ public class Pizza extends Food {
 	public void setDough(Dough dough) {
 		this.dough = dough;
 	}
-	
-	private void setPizzaType(String pizzaType) throws ItemException {
-		if (Utils.checkString(pizzaType)) {
-			this.pizzaType = pizzaType;
-		} else
-			throw new ItemException(ILLEGAL_PIZZA_TYPE);
-	}
-	
 	
 	public static List<Pizza> getPizzaList() {
 		if(pizzas.isEmpty()) {
