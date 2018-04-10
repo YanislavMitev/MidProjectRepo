@@ -216,7 +216,7 @@ public final class UserService implements IUserService {
 	@Override
 	public void order() {
 		System.out.println(
-				"Pizza | Sandwich | Pasta | Salad | Starter | Chicken | Sauce | Dessert | Drink | Back");
+				"Pizza | Sandwich | Pasta | Salad | Starter | Chicken | Sauce | Dessert | Drink | Back | Basket");
 		switch (new Scanner(System.in).next().toLowerCase()) {
 		case "pizza":
 			try (Scanner input = new Scanner(System.in);) {
@@ -272,7 +272,7 @@ public final class UserService implements IUserService {
 				String pasta = input.nextLine().toLowerCase();
 				Pasta order = null;
 				for (Pasta p : Pasta.getPastas()) {
-					if (pasta.equals(p.getPastaType())) {
+					if (pasta.equalsIgnoreCase(p.getPastaType())) {
 						order = p;
 					}
 				}
@@ -296,7 +296,7 @@ public final class UserService implements IUserService {
 				String salad = input.nextLine().toLowerCase();
 				Salad order = null;
 				for (Salad s : Salad.getSalads()) {
-					if (salad.equals(s.getSaladType())) {
+					if (salad.equalsIgnoreCase(s.getSaladType())) {
 						order = s;
 					}
 				}
@@ -340,7 +340,7 @@ public final class UserService implements IUserService {
 				String chicken = input.nextLine().toLowerCase();
 				Chicken order = null;
 				for (Chicken c : Chicken.getListWithChicken()) {
-					if (chicken.equals(c.getChickenType())) {
+					if (chicken.equalsIgnoreCase(c.getChickenType())) {
 						order = c;
 					}
 				}
@@ -362,7 +362,7 @@ public final class UserService implements IUserService {
 				String sauce = input.nextLine().toLowerCase();
 				Sauce order = null;
 				for (Sauce s : Sauce.getSauces()) {
-					if (sauce.equals(s.getSauceType())) {
+					if (sauce.equalsIgnoreCase(s.getSauceType())) {
 						order = s;
 					}
 				}
@@ -386,7 +386,7 @@ public final class UserService implements IUserService {
 				String dessert = input.nextLine().toLowerCase();
 				Dessert order = null;
 				for (Dessert d : Dessert.getDesserts()) {
-					if (dessert.equals(d.getDessertType())) {
+					if (dessert.equalsIgnoreCase(d.getDessertType())) {
 						order = d;
 					}
 				}
@@ -408,7 +408,7 @@ public final class UserService implements IUserService {
 				String drink = input.nextLine().toLowerCase();
 				Drink order = null;
 				for (Drink d : Drink.getDrinks()) {
-					if (drink.equals(d.getDrinkType())) {
+					if (d.getDrinkType().toLowerCase().contains(drink)) {
 						order = d;
 					}
 				}
@@ -430,6 +430,9 @@ public final class UserService implements IUserService {
 					order();
 				}
 			break;
+		case "basket" :
+			Loader.getInstance().basketPage();
+			break;
 		default:
 			System.out.println("Invalid option");
 			order();
@@ -449,8 +452,13 @@ public final class UserService implements IUserService {
 		if (input.next().equalsIgnoreCase("yes")) {
 			order();
 		}
+		finishOrder();
+	}
+
+	public void finishOrder() throws ItemException, BasketException {
 		userService.getLoggedUser().saveLastOrder(userService.getLoggedUser().getBasketItems());
 		userService.getLoggedUser().emptyBasket();
+		System.out.println("Total price: " + this.user.getTotalPrice());
 		System.out.println(ORDER_IS_PROCESSING);
 		Loader.getInstance().pageAfterLogin();
 	}

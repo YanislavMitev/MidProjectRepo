@@ -7,6 +7,7 @@ import java.util.Scanner;
 import bg.dominos.business.logic.UserService;
 import bg.dominos.exceptions.AddressException;
 import bg.dominos.exceptions.BasketException;
+import bg.dominos.exceptions.ItemException;
 import bg.dominos.exceptions.UserException;
 import bg.dominos.models.Address;
 import bg.dominos.models.City;
@@ -151,7 +152,7 @@ public final class Loader {
 			System.out.println("Empty basket. Navigated back to user homepage.");
 			pageAfterLogin();
 		}
-		System.out.println("Remove item | Empty basket | Continue ordering | Back");
+		System.out.println("Remove item | Empty basket | Continue ordering | Finish order | Back");
 		switch (input.nextLine().toLowerCase()) {
 		case "remove item":
 			System.out.println("Enter item's name...");
@@ -159,7 +160,7 @@ public final class Loader {
 
 			Item itemToRemove = null;
 			for (Item item : service.getLoggedUser().getBasketItems()) {
-				if (item.getType().equals(itemName)) {
+				if (item.getType().equalsIgnoreCase(itemName)) {
 					itemToRemove = item;
 				}
 			}
@@ -198,6 +199,12 @@ public final class Loader {
 		case "continue ordering":
 			service.order();
 			break;
+		case "finish order" :
+			try {
+				service.finishOrder();
+			} catch (ItemException | BasketException e) {
+				e.printStackTrace();
+			}
 		case "back":
 			pageAfterLogin();
 			break;
@@ -229,6 +236,7 @@ public final class Loader {
 			} catch (UserException e) {
 				e.printStackTrace();
 			}
+			break;
 		default:
 			System.out.println(INVALID_OPTION);
 			pageAfterLogin();

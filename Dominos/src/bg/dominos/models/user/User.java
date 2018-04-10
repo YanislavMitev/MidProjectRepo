@@ -20,7 +20,8 @@ public final class User implements IUser {
 
 	private class Basket {
 		public List<Item> items;
-
+		private float totalPrice;
+		
 		public Basket() {
 			this.items = new ArrayList<Item>();
 		}
@@ -46,7 +47,6 @@ public final class User implements IUser {
 		this.previousOrders = new TreeMap<Integer, List<Item>>();
 		this.basket = new Basket();
 		this.isLoggedOn = false;
-		// check for log in each method
 	}
 
 	public String getFirstName() {
@@ -179,8 +179,10 @@ public final class User implements IUser {
 				int indexOfItem = getIndexOfItem(item);
 				int increasedQuantity = this.basket.items.get(indexOfItem).getQuantity() + 1;
 				this.basket.items.get(indexOfItem).setQuantity(increasedQuantity);
+				this.basket.totalPrice += item.getPrice();
 			} else {
 				this.basket.items.add(item);
+				this.basket.totalPrice += item.getPrice();
 			}
 		} else
 			throw new BasketException(CANNOT_ADD_TO_BASKET);
@@ -218,5 +220,9 @@ public final class User implements IUser {
 	
 	public Map<Integer, List<Item>> getPreviousOreders(){
 		return Collections.unmodifiableMap(this.previousOrders);
+	}
+	
+	public float getTotalPrice() {
+		return this.basket.totalPrice;
 	}
 }
