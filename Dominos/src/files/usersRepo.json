@@ -1,14 +1,14 @@
 [
   {
-    "firstName": "Yanislav",
-    "lastName": "Mitev",
-    "eMail": "yanislav@gmail.com",
+    "firstName": "myName",
+    "lastName": "myLastName",
+    "eMail": "mail@gmail.com",
     "password": "azSeKazvamKaktoMamaMeEKrystila",
     "addresses": [
       {
-        "street": "Daskal Manol",
-        "streetNumber": "18",
-        "postCode": 1606,
+        "street": "steet",
+        "streetNumber": "streetNumber",
+        "postCode": 9999,
         "city": "SOFIA",
         "phoneNumber": "0899716512",
         "block": 0,
