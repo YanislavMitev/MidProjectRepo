@@ -4,3 +4,6 @@
 .plugins/
 .lock/
 .log/
+.idea/
+target/
+.metadata.rar
