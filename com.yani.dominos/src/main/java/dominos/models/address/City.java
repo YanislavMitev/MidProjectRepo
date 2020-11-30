@@ -1,5 +1,5 @@
 package dominos.models.address;
 
 public enum City {
-	SOFIA, PLOVDIV;
+	SOFIA, PLOVDIV, AYTOS
 }

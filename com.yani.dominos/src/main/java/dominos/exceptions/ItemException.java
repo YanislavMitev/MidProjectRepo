@@ -3,27 +3,16 @@ package dominos.exceptions;
 public class ItemException extends Exception {
 
 	/**
-	 * 
+	 * Serial Version UID.
 	 */
 	private static final long serialVersionUID = 3598434663114123947L;
 
-	public ItemException() {
+	/**
+	 * Constructor.
+	 *
+	 * @param msg is the exception message.
+	 */
+	public ItemException(String msg) {
+		super(msg);
 	}
-
-	public ItemException(String message) {
-		super(message);
-	}
-
-	public ItemException(Throwable cause) {
-		super(cause);
-	}
-
-	public ItemException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public ItemException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
 }

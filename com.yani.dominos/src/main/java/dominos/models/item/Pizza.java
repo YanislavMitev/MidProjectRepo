@@ -1,14 +1,8 @@
 package dominos.models.item;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import dominos.exceptions.ItemException;
 import dominos.models.Dough;
 import dominos.models.Size;
-import dominos.utils.Utils;
 
 @JsonTypeName("Pizza")
 public class Pizza extends Food {

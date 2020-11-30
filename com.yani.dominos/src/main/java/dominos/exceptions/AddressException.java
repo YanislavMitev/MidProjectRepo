@@ -3,27 +3,15 @@ package dominos.exceptions;
 public class AddressException extends Exception {
 
 	/**
-	 * 
+	 * Serial Version UID.
 	 */
 	private static final long serialVersionUID = -1511594633676846745L;
 
-	public AddressException() {
+	/**
+	 * Constructor
+	 * @param msg is the exception message.
+	 */
+	public AddressException(String msg) {
+		super(msg);
 	}
-
-	public AddressException(String message) {
-		super(message);
-	}
-
-	public AddressException(Throwable cause) {
-		super(cause);
-	}
-
-	public AddressException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public AddressException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
 }

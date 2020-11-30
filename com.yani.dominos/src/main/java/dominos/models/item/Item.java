@@ -15,8 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@JsonSubTypes.Type(Pizza.class),
 		@JsonSubTypes.Type(Salad.class),
 		@JsonSubTypes.Type(Sandwich.class),
-		@JsonSubTypes.Type(Sauce.class),
-		@JsonSubTypes.Type(Starter.class)
+		@JsonSubTypes.Type(Sauce.class)
 })
 public interface Item {
 

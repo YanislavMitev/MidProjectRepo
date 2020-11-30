@@ -1,7 +1,11 @@
 [
 	{
 		"name": "Plovdiv-Trakiya",
-		"address": "Georgy Danchov street, 16",
+		"address": {
+			"street": "Georgy Danchov street",
+			"streetNumber": "16",
+			"city": "PLOVDIV"
+		},
 		"workingTime": "11:00 - 23:01",
 		"active": true,
 		"phoneNumber": "070012525",
@@ -11,7 +15,11 @@
 	},
 	{
 		"name": "Plovdiv-Center",
-		"address": "Ivan Andonov street, 5",
+		"address": {
+			"street": "Ivan Andonov street",
+			"streetNumber": "5",
+			"city": "PLOVDIV"
+		},
 		"workingTime": "11:00 - 23:00",
 		"active": true,
 		"phoneNumber": "070012525",
@@ -20,150 +28,13 @@
 		"eatingPlaces": true
 	},
 	{
-		"address": "Mladost 1 Test Store 101",
+		"address": {
+			"street": "Mladost 1 Test Store",
+			"streetNumber": "101"
+		},
 		"workingTime": "07:00 - 23:00",
 		"active": false,
 		"phoneNumber": "070013333",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Borovo",
-		"address": "General Stefan Toshev street 8",
-		"workingTime": "11:00 - 22:05",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": false
-	},
-	{
-		"name": "Sofia - Vapcarov",
-		"address": "Boulevard Nikola Vapcarov 6",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Geo Milev",
-		"address": "Alexander Zhendov street 6",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Druzhba",
-		"address": "Professor Tsvetan Lazarov street, 124",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Krasna Polyana",
-		"address": "Pchinya street, 31",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Lyulin",
-		"address": "Pancho Vladigerov street, 21",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Mladost",
-		"address": "Boulevard Alexander Malinov 78",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Musagenitsa",
-		"address": "Plovdivsko Shose street 1-5",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Nadezhda",
-		"address": "Boulevard Lomsko Shose 174",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Pavlovo",
-		"address": "Alexander Pushkin street, 38",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": false
-	},
-	{
-		"name": "Sofia - Studentski grad",
-		"address": "Yordan Yosifov street, 4",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - Suhata reka",
-		"address": "Between apartment house 12-13",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": false
-	},
-	{
-		"name": "Sofia - Center",
-		"address": "Alexander Stamboliyski street, 41",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
-		"delivery": true,
-		"carryOut": true,
-		"eatingPlaces": true
-	},
-	{
-		"name": "Sofia - South park",
-		"address": "Byala cherkva street, 1",
-		"workingTime": "11:00 - 23:01",
-		"active": true,
-		"phoneNumber": "070012525",
 		"delivery": true,
 		"carryOut": true,
 		"eatingPlaces": true

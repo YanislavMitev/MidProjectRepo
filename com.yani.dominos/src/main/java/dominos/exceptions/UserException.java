@@ -3,27 +3,16 @@ package dominos.exceptions;
 public class UserException extends Exception {
 
 	/**
-	 * 
+	 * Serial Version UID.
 	 */
 	private static final long serialVersionUID = -688668280110241129L;
 
-	public UserException() {
+	/**
+	 * Constructor.
+	 *
+	 * @param msg is the exception message.
+	 */
+	public UserException(String msg) {
+		super(msg);
 	}
-
-	public UserException(String arg0) {
-		super(arg0);
-	}
-
-	public UserException(Throwable cause) {
-		super(cause);
-	}
-
-	public UserException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public UserException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
 }

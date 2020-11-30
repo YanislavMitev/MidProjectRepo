@@ -1,7 +1,7 @@
 package dominos.models.user;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +19,23 @@ import dominos.utils.Utils;
 public final class User implements IUser {
 
 	private class Basket {
-		public final List<Item> items;
+		public final Map<Item, Integer> items;
 		private float totalPrice;
 
 		public Basket() {
-			this.items = new ArrayList<>();
+			this.items = new HashMap<>();
+		}
+
+		public void removeItem(Item item) {
+			if (items.containsKey(item)) {
+				int currentQuantity = items.get(item);
+
+				if (currentQuantity > 1) {
+					items.put(item, --currentQuantity);
+				} else {
+					items.remove(item);
+				}
+			}
 		}
 	}
 
@@ -89,7 +101,6 @@ public final class User implements IUser {
 			throw new UserException("Illegal e-mail");
 	}
 
-	@Override
 	public void addAddress(Address address) throws AddressException, UserException {
 		if (this.checkLogStatus()) {
 			if (!Utils.isNull(address) && !this.addresses.contains(address)) {
@@ -100,7 +111,6 @@ public final class User implements IUser {
 			throw new UserException(IUser.LOGIN_FIRST);
 	}
 
-	@Override
 	public void deleteAddress(Address address) throws AddressException, UserException {
 		if (this.checkLogStatus()) {
 			if (!Utils.isNull(address)) {
@@ -173,31 +183,26 @@ public final class User implements IUser {
 		}
 	}
 
-	private int getIndexOfItem(Item item) {
-		return this.basket.items.indexOf(item);
-	}
-
 	public void addToBasket(Item item) throws ItemException, BasketException {
 		if (!Utils.isNull(item)) {
-			if (this.basket.items.contains(item)) {
-				int indexOfItem = getIndexOfItem(item);
-				int increasedQuantity = this.basket.items.get(indexOfItem).getQuantity() + 1;
-				this.basket.items.get(indexOfItem).setQuantity(increasedQuantity);
-				this.basket.totalPrice += item.getPrice();
+			if (this.basket.items.containsKey(item)) {
+				int currentQuantity = this.basket.items.get(item);
+				this.basket.items.put(item, ++currentQuantity);
 			} else {
-				this.basket.items.add(item);
+				this.basket.items.put(item, 1);
 				this.basket.totalPrice += item.getPrice();
 			}
-		} else
+		} else {
 			throw new BasketException(CANNOT_ADD_TO_BASKET);
+		}
 	}
 
 	public void removeFromBasket(Item item) throws BasketException {
 		if (!Utils.isNull(item)) {
-			if (this.basket.items.contains(item)) {
-				this.basket.items.remove(getIndexOfItem(item));
-			}
-		} else throw new BasketException(CANNOT_REMOVE_FROM_BASKET);
+			this.basket.removeItem(item);
+		} else {
+			throw new BasketException(CANNOT_REMOVE_FROM_BASKET);
+		}
 	}
 
 	public void emptyBasket() throws BasketException {
@@ -219,8 +224,8 @@ public final class User implements IUser {
 			throw new ItemException("Null item list.");
 	}
 
-	public List<Item> getBasketItems() {
-		return Collections.unmodifiableList(this.basket.items);
+	public Map<Item, Integer> getBasketItems() {
+		return Collections.unmodifiableMap(this.basket.items);
 	}
 
 	public Map<Integer, List<Item>> getPreviousOreders() {

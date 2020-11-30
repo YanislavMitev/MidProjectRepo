@@ -1,52 +1,71 @@
 package dominos.models.address;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dominos.exceptions.AddressException;
-import dominos.exceptions.RestaurantException;
-import dominos.models.Restaurant;
 import dominos.utils.Utils;
 
+
 public class Address {
-	private static final String ILLEGAL_RESTAURANT = "Illegal restaurant";
 	private static final String ILLEGAL_POSTCODE = "Illegal postcode";
 	private static final String ILLEGAL_STREET_NUMBER = "Illegal street number";
-	private static final String ILLEGAL_PHONE_NUMBER = "Illegal phone number";
 	private static final String ILLEGAL_STREET_NAME = "Illegal street name";
-	private static final String ILLEGAL_ADDRESS_NAME = "Illegal address name";
+
 	private static final int HIGHER_POSTCODE = 10000;
 	private static final int LOWER_POSTCODE = 1000;
-	private String name;
+
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_ABSENT)
+	private String alias;
+
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private String street;
+
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private String streetNumber;
+
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private int postCode;
+
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private City city;
 
-	private transient Restaurant restaurant; // will be marked with @JsonIgnore annotation
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_ABSENT)
+	private int apartmentBuildingNumber;
 
-	private String phoneNumber;
-	private int block;
-	private int entrance;
-	private int floor;
-	private int apartament;
-	private String bell;
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_ABSENT)
+	private String entrance;
 
-	public Address(
-			String street,
-			String streetNumber,
-			int postCode,
-			City city,
-			String phoneNumber,
-			int floor) {
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_ABSENT)
+	private byte floor;
 
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_ABSENT)
+	private int flatNumber;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param street is the street of the address.
+	 * @param streetNumber is the street number of the address.
+	 * @param postCode is the postcode of the address.
+	 * @param city is the address city.
+	 * @param floor is the street of the address.
+	 */
+	public Address(String alias, String street, String streetNumber, int postCode, City city, byte floor) {
+		this.alias = alias;
 		this.street = street;
 		this.streetNumber = streetNumber;
 		this.postCode = postCode;
 		this.city = city;
-		this.phoneNumber = phoneNumber;
 		this.floor = floor;
-	}
-
-	public String getName() {
-		return this.name;
 	}
 
 	@Override
@@ -86,11 +105,8 @@ public class Address {
 		return this.getFloor() == other.getFloor();
 	}
 
-	public void setName(String name) throws AddressException { 
-		if (Utils.checkString(name)) {
-			this.name = name;
-		} else
-			throw new AddressException(ILLEGAL_ADDRESS_NAME);
+	public String getAlias() {
+		return alias;
 	}
 
 	public String getStreet() {
@@ -100,8 +116,9 @@ public class Address {
 	public void setStreet(String street) throws AddressException { 
 		if (Utils.checkString(street)) {
 			this.street = street;
-		} else
+		} else {
 			throw new AddressException(ILLEGAL_STREET_NAME);
+		}
 	}
 
 	public String getStreetNumber() {
@@ -111,8 +128,9 @@ public class Address {
 	public void setStreetNumber(String streetNumber) throws AddressException {
 		if (Utils.checkString(streetNumber)) {
 			this.streetNumber = streetNumber;
-		} else
+		} else {
 			throw new AddressException(ILLEGAL_STREET_NUMBER);
+		}
 	}
 
 	public int getPostCode() {
@@ -122,7 +140,9 @@ public class Address {
 	public void setPostCode(int postCode) throws AddressException {
 		if (postCode >= LOWER_POSTCODE && postCode < HIGHER_POSTCODE) {
 			this.postCode = postCode;
-		}else throw new AddressException(ILLEGAL_POSTCODE);
+		} else {
+			throw new AddressException(ILLEGAL_POSTCODE);
+		}
 	}
 
 	public City getCity() {
@@ -133,46 +153,25 @@ public class Address {
 		this.city = city;
 	}
 
-	public Restaurant getRestaurant() {
-		return restaurant;
-	}
-
-	public void setRestaurant(Restaurant restaurant) throws RestaurantException {
-		// check if restaurant exist
-		if(!Utils.isNull(restaurant)) {
-			this.restaurant = restaurant;
-		}else throw new RestaurantException(ILLEGAL_RESTAURANT);
-	}
-
 	@Override
 	public String toString() {
 		return "Address [street=" + street + ", streetNumber=" + streetNumber + ", postCode=" + postCode + ", city="
-				+ city + ", restaurant=" + restaurant + ", phoneNumber=" + phoneNumber + ", floor=" + floor + "]";
+				+ city + ", floor=" + floor + "]";
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public int getApartmentBuildingNumber() {
+		return this.apartmentBuildingNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) throws AddressException {
-		if(Utils.checkPhoneNumber(phoneNumber)) {
-			this.phoneNumber = phoneNumber;
-		}else throw new AddressException(ILLEGAL_PHONE_NUMBER);
+	public void setApartmentBuildingNumber(int apartmentBuildingNumber) {
+		this.apartmentBuildingNumber = apartmentBuildingNumber;
 	}
 
-	public int getBlock() {
-		return this.block;
-	}
-
-	public void setBlock(int block) {
-		this.block = block;
-	}
-
-	public int getEntrance() {
+	public String getEntrance() {
 		return this.entrance;
 	}
 
-	public void setEntrance(int entrance) {
+	public void setEntrance(String entrance) {
 		this.entrance = entrance;
 	}
 
@@ -180,28 +179,15 @@ public class Address {
 		return this.floor;
 	}
 
-	public void setFloor(int floor) {
+	public void setFloor(byte floor) {
 		this.floor = floor;
 	}
 
-	public int getApartament() {
-		return this.apartament;
+	public int getFlatNumber() {
+		return this.flatNumber;
 	}
 
-	public void setApartament(int apartament) {
-		this.apartament = apartament;
+	public void setFlatNumber(int flatNumber) {
+		this.flatNumber = flatNumber;
 	}
-
-	public String getBell() {
-		return this.bell;
-	}
-
-	public void setBell(String bell) {
-		if(Utils.checkString(bell)) {
-			this.bell = bell;			
-		}else {
-			this.bell = "";
-		}
-	}
-
 }

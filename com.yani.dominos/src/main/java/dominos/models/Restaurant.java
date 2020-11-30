@@ -1,32 +1,48 @@
 package dominos.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dominos.exceptions.RestaurantException;
+import dominos.models.address.Address;
 import dominos.utils.Utils;
 
+/**
+ * Restaurant representation class.
+ */
 public class Restaurant {
 	private static final String ILLEGAL_WORKING_TIME = "Illegal working time";
 	private static final String ILLEGAL_ADDRESS_NAME = "Illegal address name";
 	private static final String ILLEGAL_RESTAURANT_NAME = "Illegal restaurant name";
 	private static final String ILLEGAL_PHONE_NUMBER = "Illegal restaurant phone number";
+
+	@JsonProperty
 	private String name;
-	private String address;
+
+	@JsonProperty
+	private Address address;
+
+	@JsonProperty
 	private String workingTime;
+
+	@JsonProperty
 	private boolean active;
+
+	@JsonProperty
 	private String phoneNumber;
+
+	@JsonProperty
 	private boolean delivery;
+
+	@JsonProperty
 	private boolean carryOut;
+
+	@JsonProperty
 	private boolean eatingPlaces;
 
-	public Restaurant(String name, String address, String workingTime, boolean active, String phoneNumber,
-			boolean delivery, boolean carryOut, boolean eatingPlaces) throws RestaurantException {
-		setName(name);
-		setAddress(address);
-		setWorkingTime(workingTime);
-		setActive(active);
-		setPhoneNumber(phoneNumber);
-		setDelivery(delivery);
-		setCarryOut(carryOut);
-		setEatingPlaces(eatingPlaces);
+	/**
+	 * Constructor.
+	 */
+	public Restaurant() {
+		// No ops.
 	}
 
 	public String getName() {
@@ -40,15 +56,16 @@ public class Restaurant {
 			throw new RestaurantException(ILLEGAL_RESTAURANT_NAME);
 	}
 
-	public String getAddress() {
+	public Address getAddress() {
 		return this.address;
 	}
 
-	public void setAddress(String address) throws RestaurantException {
-		if (Utils.checkString(address)) {
+	public void setAddress(Address address) throws RestaurantException {
+		if (!Utils.isNull(address)) {
 			this.address = address;
-		} else
+		} else {
 			throw new RestaurantException(ILLEGAL_ADDRESS_NAME);
+		}
 	}
 
 	public String getWorkingTime() {

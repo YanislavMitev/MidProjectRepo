@@ -1,11 +1,8 @@
 package dominos.application;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
 
-import dominos.business.logic.UserService;
 import dominos.exceptions.AddressException;
 import dominos.exceptions.BasketException;
 import dominos.exceptions.ItemException;
@@ -17,16 +14,9 @@ import dominos.models.item.Item;
 public final class Loader {
 	private static final String INVALID_OPTION = "Invalid option.";
 	private static Loader loader;
-	private UserService service;
 
 	private Loader() {
-		service = UserService.getInstance();
-		try {
-			service.extractRestaurants();
-			service.extractUsers();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	public static Loader getInstance() {
@@ -41,38 +31,34 @@ public final class Loader {
 		Scanner input = new Scanner(System.in);
 		switch (input.nextLine().toLowerCase()) {
 		case "my profile":
-			System.out.println("Name: " + service.getLoggedUser().getFirstName());
-			System.out.println("Surname: " + service.getLoggedUser().getLastName());
-			System.out.println("E-mail: " + service.getLoggedUser().getEMail());
+			System.out.println("Name: " + "LOGGED_USER_FIRST_NAME");
+			System.out.println("Surname: " + "LOGGED_USER_LAST_NAME");
+			System.out.println("E-mail: " + "LOGGED_USER_EMAIL");
 			System.out.println("Would you like to change your password? YES/NO");
 			String choice = input.next().toLowerCase();
 			if (choice.equals("yes")) {
 				String oldPassword = input.next();
 				String newPassword = input.next();
 				String reenterNewPassword = input.next();
-				try {
-					service.changePassword(oldPassword, newPassword, reenterNewPassword);
-				} catch (UserException e) {
-					e.printStackTrace();
-				}
+
+				/*change password*/
 			}
 			goBack(input);
 			break;
 		case "my addresses":
 			System.out.println("My addresses");
 
-			for (Address a : service.getLoggedUser().getAddresses()) {
+			for (Address a : new ArrayList<Address>() /*get addresses*/) {
 				System.out.println("----------------------------------");
-				System.out.println("Friendly name " + ((a.getName() == null) ? " " : a.getName()));
+				System.out.println("Friendly name " + a.getAlias());
 				System.out.println("Street " + ((a.getStreet() == null) ? " " : a.getStreet()));
 				System.out.println("Number " + ((a.getStreetNumber() == null) ? " " : a.getStreetNumber()));
 				System.out.println("Post code " + a.getPostCode());
 				System.out.println("City " + a.getCity());
-				System.out.println("Phone number " + ((a.getPhoneNumber() == null) ? " " : a.getPhoneNumber()));
-				System.out.println("Bell " + a.getBell());
+				System.out.println("Phone number " + "USER_PHONE_NUMBER");
 				System.out.println("Floor " + a.getFloor());
-				System.out.println("Block " + a.getBlock());
-				System.out.println("Apartment " + a.getApartament());
+				System.out.println("Block " + a.getApartmentBuildingNumber());
+				System.out.println("Apartment " + a.getFlatNumber());
 				System.out.println("Entrance " + a.getEntrance());
 				System.out.println("----------------------------------");
 			}
@@ -96,25 +82,21 @@ public final class Loader {
 				String phoneNumber = input.next();
 				
 				System.out.println("Floor:");
-				int floor = input.nextInt();
+				byte floor = input.nextByte();
 
-				try {
-					service.getLoggedUser()
-							.addAddress(new Address(street, streetNumber, postCode, city, phoneNumber, floor));
-					System.out.println("New address has been added!");
-				} catch (AddressException | UserException e) {
-					e.printStackTrace();
-				}
+				/*service.getLoggedUser()
+						.addAddress(new Address("alias", street, streetNumber, postCode, city, floor));*/
+				System.out.println("New address has been added!");
 
 				goBack(input);
 			}
 			break;
 		case "my orders":
-			for (Entry<Integer, List<Item>> entry : service.getLoggedUser().getPreviousOreders().entrySet()) {
+			for (Entry<Integer, List<Item>> entry : new HashMap<Integer, List<Item>>().entrySet() /*previous orders*/) {
 				float price = 0;
 				for (Item item : entry.getValue()) {
 					System.out.println("Product: " + item.getType());
-					System.out.println("Quantity: " + item.getQuantity());
+					System.out.println("Quantity: " /* choose quantity logic */);
 					price += item.getPrice();
 				}
 				System.out.println("Price: " + price);
@@ -146,7 +128,7 @@ public final class Loader {
 	}
 
 	public void basketPage() {
-		if(service.getLoggedUser().getBasketItems().isEmpty()) {
+		if(false/*service.getLoggedUser().getBasketItems().isEmpty()*/) {
 			System.out.println("Basket is empty.");
 			try {
 				Thread.sleep(2000);
@@ -158,10 +140,10 @@ public final class Loader {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		float price = 0.0f;
-		for (Item item : service.getLoggedUser().getBasketItems()) {
-			System.out.print("Item: " + item.getType() + "\t");
-			System.out.println("Quantity: " + item.getQuantity());
-			price += item.getPrice();
+		for (Entry<Item, Integer> entry : new HashMap<Item, Integer>().entrySet()/*get basket items*/) {
+			System.out.print("Item: " + entry.getKey().getType() + "\t");
+			System.out.println("Quantity: " + entry.getValue());
+			price += entry.getKey().getPrice();
 		}
 		System.out.println("Price: " + price);
 		if(price == 0.0f) {
@@ -174,16 +156,11 @@ public final class Loader {
 			System.out.println("Enter item's name...");
 			String itemName = input.nextLine().toLowerCase();
 
-			for (Iterator<Item> it = service.getLoggedUser().getBasketItems().iterator(); it.hasNext();) {
-				Item item = it.next();
+			for (Item item : new HashMap<Item, Integer>().keySet()) {
 				if (item.getType().equalsIgnoreCase(itemName)) {
-					try {
-						service.getLoggedUser().removeFromBasket(item);
-					} catch (BasketException e) {
-						e.printStackTrace();
-					}
+					/*remove item from basket*/
 					break;
-				}else {
+				} else {
 					System.out.println("No such element");
 				}
 			}
@@ -192,13 +169,9 @@ public final class Loader {
 		case "empty basket":
 			System.out.println("Are you sure you want to empty your basket? YES/NO");
 			if(input.next().equalsIgnoreCase("yes")) {
-				try {
-					service.getLoggedUser().emptyBasket();
-					System.out.println("Empty basket.");
-					pageAfterLogin();
-				} catch (BasketException e) {
-					e.printStackTrace();
-				}
+				/*empty basket*/
+				System.out.println("Empty basket.");
+				pageAfterLogin();
 			}
 			System.out.println("Do you wish to go back? YES/NO");
 			while(input.next().equalsIgnoreCase("no")) {
@@ -212,14 +185,10 @@ public final class Loader {
 			pageAfterLogin();
 			break;
 		case "continue ordering":
-			service.order();
+			/* make an order */
 			break;
 		case "finish order" :
-			try {
-				service.finishOrder();
-			} catch (ItemException | BasketException e) {
-				e.printStackTrace();
-			}
+			/* finish order */
 			break;
 		case "back":
 			pageAfterLogin();
@@ -236,7 +205,7 @@ public final class Loader {
 		System.out.println("---- Order ------- Settings ------- Basket ------- Log out ----");
 		switch (new Scanner(System.in).nextLine().toLowerCase()) {
 		case "order":
-			service.order();
+			/* make an order */
 			break;
 		case "settings":
 			settingsPage();
@@ -246,7 +215,7 @@ public final class Loader {
 			break;
 		case "log out":
 			try {
-				service.logOut();
+				/* log out */
 				loadHomePage();
 				break;
 			} catch (UserException e) {
@@ -264,7 +233,7 @@ public final class Loader {
 	public void loadHomePage() throws UserException {
 		Scanner sc = new Scanner(System.in);
 
-		if (this.service != null && this.service.getLoggedUser() == null) {
+		if (true /*no one has logged in*/) {
 			System.out.println("---- Login ------- Register ------- Exit");
 			String option = sc.next().trim().toLowerCase();
 			switch (option) {
@@ -283,13 +252,13 @@ public final class Loader {
 					e.printStackTrace();
 				}
 				login(sc);
-				if (service.getLoggedUser() != null) {
+				if (false/*service.getLoggedUser() != null*/) {
 					pageAfterLogin();
 				}
 				break;
 			case "exit":
 				try {
-					this.service.saveChangesToUsers();
+					/*this.service.saveChangesToUsers();*/
 					loader = null;
 					System.out.println("Credits: Nikoleta Deleva & Yanislav Mitev ");
 					System.exit(0);
@@ -319,12 +288,8 @@ public final class Loader {
 		String eMail = sc.next();
 		System.out.print("Password: ");
 		String password = sc.next();
-		try {
-			this.service.register(firstName, lastName, eMail, password);
-		} catch (UserException e) {
-			System.out.println(e.getMessage());
-			register(sc);
-		}
+
+		/*this.service.register(firstName, lastName, eMail, password);*/
 	}
 
 	private void login(Scanner sc) {
@@ -332,12 +297,6 @@ public final class Loader {
 		String email = sc.next();
 		System.out.print("Password: ");
 		String pass = sc.next();
-		try {
-			this.service.logIn(email, pass);
-		} catch (UserException e) {
-			System.out.println(e.getMessage());
-			login(sc);
-		}
+		/*this.service.logIn(email, pass);*/
 	}
-
 }
