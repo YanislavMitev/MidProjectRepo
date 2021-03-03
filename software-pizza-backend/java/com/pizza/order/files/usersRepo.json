@@ -1,0 +1,28 @@
+[
+  {
+    "firstName": "Yanislav",
+    "lastName": "Mitev",
+    "password": "123456",
+    "addresses": [],
+    "basket": {
+      "items": {}
+    },
+    "previousOrders": {},
+    "totalPrice": 0.0,
+    "basketItems": {},
+    "email": "yanislav@mitev.com"
+  },
+  {
+    "firstName": "Nikolay",
+    "lastName": "Angleov",
+    "password": "123456",
+    "addresses": [],
+    "basket": {
+      "items": {}
+    },
+    "previousOrders": {},
+    "totalPrice": 0.0,
+    "basketItems": {},
+    "email": "nikolay@angelov.com"
+  }
+]
